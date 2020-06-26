@@ -8,12 +8,14 @@
 <script>
 import NavigationBar from './components/NavigationBar.vue'
 import QuestionGrid from './components/QuestionGrid.vue'
+import { eventBus } from './main.js'
 export default {
   name: 'app',
   data(){
     return {
       questions: [],
-      category: []
+      category: [],
+      selectedCategory: null
     }
   },
   components:{
@@ -22,10 +24,15 @@ export default {
   },
 
   mounted(){
-    fetch('https://opentdb.com/api.php?amount=3&category=22&difficulty=easy&type=boolean')
-    .then( res => res.json())
-    .then(data => {this.questions = data.results
-      this.category = data.results[0].category
+
+    eventBus.$on('category-selected', (category) => {
+      this.selectedCategory = category
+      
+      fetch(`https://opentdb.com/api.php?amount=3&category=${this.selectedCategory}&difficulty=easy&type=boolean`)
+      .then( res => res.json())
+      .then(data => {this.questions = data.results
+        this.category = data.results[0].category
+      })
     })
   }
 }
