@@ -1,5 +1,7 @@
 <template lang="html">
+<div class="navigation">
 
+</div>
 </template>
 
 <script>
