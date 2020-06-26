@@ -1,28 +1,35 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="html">
+<div>
+<navigation-bar :category = "category"/>
+<question-grid :questions = "questions"/>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import NavigationBar from './components/NavigationBar.vue'
+import QuestionGrid from './components/QuestionGrid.vue'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: 'app',
+  data(){
+    return {
+      questions: [],
+      category: []
+    }
+  },
+  components:{
+    'navigation-bar': NavigationBar,
+    'question-grid': QuestionGrid
+  },
+
+  mounted(){
+    fetch('https://opentdb.com/api.php?amount=3&category=22&difficulty=easy&type=boolean')
+    .then( res => res.json())
+    .then(data => {this.questions = data.results
+      this.category = data.results[0].category
+    })
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="css" scoped>
 </style>
