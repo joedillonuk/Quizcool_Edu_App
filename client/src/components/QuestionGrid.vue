@@ -1,7 +1,7 @@
 <template lang="html">
 <div>
-<ol v-for=" question in questions" :question="question">
-  <question-item/>
+<ol v-for=" question in questions" >
+  <question-item :question="question"/>
 </ol>
 </div>
 </template>
