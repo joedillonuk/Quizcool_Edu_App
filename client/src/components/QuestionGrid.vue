@@ -3,6 +3,7 @@
 <ol v-for=" question in questions" >
   <question-item :question="question"/>
 </ol>
+<!-- <button v-on:submit="addUserScore" type="button" name="button">Finish</button> -->
 </div>
 </template>
 

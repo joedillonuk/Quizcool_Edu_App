@@ -2,12 +2,12 @@
   <div>
     <p>{{question.question}}</p>
     <label for="answer">Answer:</label>
-    <input v-model="answer" type="radio" name="answer" :value="true">True</input>
-    <input v-model="answer" type="radio" name="answer" :value="false">False</input>
+    <input v-model="answer" type="radio" name="answer" value="True">True</input>
+    <input v-model="answer" type="radio" name="answer" value="False">False</input>
     <br>
-    <button v-on:click="decideAnswer" type="button" name="button">Submit</button>
+    <button v-model="this.userScore" v-on:click="decideAnswer" type="button" name="button">Submit</button>
     <p v-if="this.answer === question.correct_answer">Correct</p>
-    <p v-if="this.answer ==! question.correct_answer">Wrong</p>
+    <p v-if="this.answer === question.incorrect_answers[0]">Wrong</p>
   </div>
 </template>
 
@@ -17,12 +17,17 @@ export default {
   props: ['question'],
   data(){
     return {
-      answer: null
+      answer: null,
+      userScore: 0
     }
   },
   methods: {
     decideAnswer: function(){
-
+      if (this.answer === this.question.correct_answer && this.userScore === 0){
+        this.userScore += 1
+      } else {
+        this.userScore = this.userScore
+      }
     }
   }
 }
