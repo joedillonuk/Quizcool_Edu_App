@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <p>{{question.question}}</p>
+    <p>{{escapeHtml(question.question)}}</p>
     <label for="answer">Answer:</label>
     <input v-model="answer" type="radio" name="answer" value="True">True</input>
     <input v-model="answer" type="radio" name="answer" value="False">False</input>
@@ -28,7 +28,15 @@ export default {
       } else {
         this.userScore = this.userScore
       }
-    }
+    },
+    escapeHtml(question) {
+    return question
+         .replace(/&amp/g, " ")
+         .replace(/&lt;/g, "<")
+         .replace(/&gt;/g, ">")
+         .replace(/&quot;/g, "")
+         .replace(/&#039;/g, "'");
+ }
   }
 }
 </script>
