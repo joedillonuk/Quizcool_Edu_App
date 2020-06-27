@@ -11,6 +11,7 @@
 <br>
 <h2>You have answered {{currentScore.length}} questions.</h2>
 <h2 v-if="currentScore.length">Your score is {{totalScore}}.</h2>
+<h2 v-if="percentage">You have answered {{percentage}}% of questions right.</h2>
 </div>
 </template>
 
@@ -66,6 +67,9 @@ export default {
   computed: {
     totalScore: function(){
       return this.currentScore.reduce((sum, current) => sum + current, 0)
+    },
+    percentage: function(){
+      return Math.round((100 / this.currentScore.length) * this.totalScore)
     }
   }
 }
