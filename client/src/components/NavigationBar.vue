@@ -1,9 +1,11 @@
 <template lang="html">
   <div class="navigation">
     <nav>
-      <button type="button" v-on:click="geography">Geography</button>
-      <button type="button" v-on:click="sport">Sport</button>
-      <button type="button" v-on:click="history">History</button>
+      <button type="button" v-on:click="handleCategory(22)">Geography</button>
+      <button type="button" v-on:click="handleCategory(21)">Sport</button>
+      <button type="button" v-on:click="handleCategory(23)">History</button>
+      <button type="button" v-on:click="handleCategory(9)">General Knowledge</button>
+
 
       <select v-on:change="handleSelectUser" v-model="selectedUser">
         <option disabled value="" selected>Select a user...</option>
@@ -28,16 +30,8 @@ export default {
     }
   },
   methods:{
-    geography(){
-      this.selectedCategory = 22
-      eventBus.$emit('category-selected', this.selectedCategory)
-    },
-    sport(){
-      this.selectedCategory = 21
-      eventBus.$emit('category-selected', this.selectedCategory)
-    },
-    history(){
-      this.selectedCategory = 23
+    handleCategory(category){
+      this.selectedCategory = category
       eventBus.$emit('category-selected', this.selectedCategory)
     },
     handleSelectUser(){
