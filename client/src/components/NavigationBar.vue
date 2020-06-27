@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="navigation">
     <nav>
-      <button type="button" v-on:click="handleCategory(22)">Geography</button>
-      <button type="button" v-on:click="handleCategory(21)">Sport</button>
-      <button type="button" v-on:click="handleCategory(23)">History</button>
-      <button type="button" v-on:click="handleCategory(9)">General Knowledge</button>
+      <button type="button" v-on:click.once="handleCategory(22)">Geography</button>
+      <button type="button" v-on:click.once="handleCategory(21)">Sport</button>
+      <button type="button" v-on:click.once="handleCategory(23)">History</button>
+      <button type="button" v-on:click.once="handleCategory(9)">General Knowledge</button>
 
 
       <select v-on:change="handleSelectUser" v-model="selectedUser">
@@ -50,4 +50,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 </style>
