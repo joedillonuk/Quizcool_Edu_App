@@ -9,7 +9,8 @@
 <!-- (currentScore.reduce did not work withing double curlies) -->
 <br>
 <br>
-You have answered {{currentScore.length}} questions.
+<h2>You have answered {{currentScore.length}} questions.</h2>
+<h2 v-if="currentScore.length">Your score is {{totalScore}}.</h2>
 </div>
 </template>
 
@@ -58,9 +59,14 @@ export default {
     eventBus.$on('user-selected', (user) => {
       this.selectedUser = user})
 
-      eventBus.$on('send-score', (score) => {
-        this.currentScore.push(score)})
+    eventBus.$on('send-score', (score) => {
+      this.currentScore.push(score)})
 
+  },
+  computed: {
+    totalScore: function(){
+      return this.currentScore.reduce((sum, current) => sum + current, 0)
+    }
   }
 }
 </script>
