@@ -1,8 +1,8 @@
 <template lang="html">
 <div>
-<home-page v-if="!selectedUser"/>
-<navigation-bar v-if="selectedUser"/>
-<!-- <navigation-bar/> -->
+<!-- <home-page v-if="!selectedUser"/>
+<navigation-bar v-if="selectedUser"/> -->
+<navigation-bar/>
 
 
 <question-grid :questions = "questions"/>
@@ -41,7 +41,7 @@ export default {
     eventBus.$on("category-selected", category => {
       this.selectedCategory = category;
 
-      
+
 
 
 

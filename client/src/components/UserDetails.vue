@@ -28,9 +28,11 @@ export default {
       });
       eventBus.$on('new-user', (payload) => {
         UserService.updateUser(payload)
-        .then(user => {this.users.push(user),
-      this.selectedUser = user})
-    
+        .then(user => {this.users.push(user)
+          ,
+      this.selectedUser = user
+    })
+
       })
 
   },

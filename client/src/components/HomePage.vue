@@ -5,7 +5,6 @@
   <select v-on:change="handleSelectUser" v-model="selectedUser">
     <option class="main-font" disabled value="" selected>Select a user...</option>
     <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
-
   </select>
   <p>create new user</p>
   <form v-on:submit="createUser">
