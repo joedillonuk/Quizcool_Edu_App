@@ -10,7 +10,7 @@
   <form v-on:submit="createUser">
   <label for="">Name</label>
   <input type="text" v-model="name">
-  <input type="submit" name="" value="Add User">
+  <input type="submit" value="Add User">
   </form>
 </div>
 </template>
@@ -49,7 +49,7 @@ export default {
       }
     eventBus.$emit('new-user', payload)
     this.name = ''
-
+    this.users.push(payload)
     }
   },
   components:{
