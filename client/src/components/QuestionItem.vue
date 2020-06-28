@@ -2,7 +2,7 @@
 
   <div>
     <p>{{escapeHtml(question.question)}}</p>
-    <div v-if="!this.answer">
+    <div class="main-font" v-if="!this.answer">
       <label for="answer">Answer:</label>
       <input v-on:change="sendScore()" v-model="answer" type="radio" name="answer" value="True">True</input>
       <input v-on:change="sendScore()" v-model="answer" type="radio" name="answer" value="False">False</input>

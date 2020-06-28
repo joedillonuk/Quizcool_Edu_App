@@ -1,11 +1,11 @@
 <template lang="html">
-  <div class="navigation">
+  <div >
     <nav>
       <button type="button" v-on:click.once="handleCategory(22)">Geography</button>
       <button type="button" v-on:click.once="handleCategory(21)">Sport</button>
       <button type="button" v-on:click.once="handleCategory(23)">History</button>
       <button type="button" v-on:click.once="handleCategory(9)">General Knowledge</button>
-<user-details/>
+<user-details class="main-font"/>
     </nav>
 
   </div>
