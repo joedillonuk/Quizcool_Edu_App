@@ -21,21 +21,17 @@ export default {
   },
 
   mounted(){
-
-
       eventBus.$on("send-score", score => {
         this.currentScore.push(score);
       });
-      eventBus.$on('new-user', (payload) => {
-        UserService.updateUser(payload)
-        .then(user => {this.users.push(user)
-          ,
-      this.selectedUser = user
-    })
+      // eventBus.$on('new-user', (payload) => {
+    //     UserService.updateUser(payload)
+    //     .then(user => {this.users.push(user)
+    //       ,
+    //   this.selectedUser = user
+    // })
 
-      })
-
-  },
+      },
   computed: {
     totalScore: function() {
       return this.currentScore.reduce((sum, current) => sum + current, 0);

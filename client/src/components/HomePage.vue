@@ -47,9 +47,12 @@ export default {
         level: this.level,
         points: this.points
       }
-    eventBus.$emit('new-user', payload)
+      UserService.updateUser(payload)
+      .then(user => {this.users.push(user)
+        ,
+    this.selectedUser = user.name
+  })
     this.name = ''
-    this.users.push(payload)
     }
   },
   components:{
