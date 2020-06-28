@@ -1,5 +1,5 @@
 <template lang="html">
-<div>
+<div class="question-font">
 <ol v-for=" question in questions" >
   <question-item :question="question"/>
 </ol>
@@ -19,4 +19,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.question-font{
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+}
 </style>

@@ -56,5 +56,9 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
+.main-font {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+}
 </style>
