@@ -1,7 +1,12 @@
 <template lang="html">
 <div class="">
   <p>Welcome</p>
-  <user-details/>
+  <!-- <user-details/> -->
+  <select v-on:change="handleSelectUser" v-model="selectedUser">
+    <option class="main-font" disabled value="" selected>Select a user...</option>
+    <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
+
+  </select>
   <p>create new user</p>
   <form v-on:submit="createUser">
   <label for="">Name</label>
@@ -21,10 +26,21 @@ export default {
     return{
       name: null,
       level: 0,
-      points: 0
+      points: 0,
+      selectedUser: null,
+      users: []
     }
   },
+  mounted(){
+      UserService.getUsers().then(users => (this.users = users));
+    },
   methods:{
+
+      handleSelectUser(){
+        eventBus.$emit('user-selected', this.selectedUser)
+      },
+
+
     createUser(event){
       event.preventDefault()
       const payload = {
@@ -34,6 +50,7 @@ export default {
       }
     eventBus.$emit('new-user', payload)
     this.name = ''
+
     }
   },
   components:{

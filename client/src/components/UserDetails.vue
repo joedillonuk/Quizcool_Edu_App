@@ -1,10 +1,6 @@
 <template lang="html">
 <div class="">
-  <select v-on:change="handleSelectUser" v-model="selectedUser">
-    <option class="main-font" disabled value="" selected>Select a user...</option>
-    <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
 
-  </select>
   <h2 class="main-font">You have answered {{currentScore.length}} questions.</h2>
   <h2 class="main-font" v-if="currentScore.length">Your score is {{totalScore}}.</h2>
   <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2>
@@ -23,13 +19,9 @@ export default {
       currentScore: []
     }
   },
-  methods: {
-    handleSelectUser(){
-      eventBus.$emit('user-selected', this.selectedUser)
-    }
-  },
+
   mounted(){
-      UserService.getUsers().then(users => (this.users = users));
+
 
       eventBus.$on("send-score", score => {
         this.currentScore.push(score);
@@ -38,7 +30,7 @@ export default {
         UserService.updateUser(payload)
         .then(user => {this.users.push(user),
       this.selectedUser = user})
-      this.handleSelectUser()
+    
       })
 
   },
