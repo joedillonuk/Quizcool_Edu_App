@@ -13,9 +13,15 @@
       <button v-model="this.userScore" v-on:click="decideAnswer" type="button" name="button">Submit</button>
     </div> -->
 
-    <div>
+    <!-- <div>
       <p class="correct" v-if="this.answer === question.correct_answer">You answered {{this.answer}}. You are correct!</p>
       <p class="incorrect" v-if="this.answer === question.incorrect_answers[0]">You answered {{this.answer}}. You are incorrect.</p>
+      <br>
+    </div> -->
+
+    <div>
+      <img class="correct" v-if="this.answer === question.correct_answer" src="../assets/feedback/correct.png">
+      <img class="incorrect" v-if="this.answer === question.incorrect_answers[0]" src="../assets/feedback/incorrect.png">
       <br>
     </div>
 
@@ -74,12 +80,17 @@
 
   <style lang="css" scoped>
 
-.correct {
+{/* .correct {
   color: green;
 }
 
 .incorrect {
   color: red;
+} */}
+
+img {
+  width: 40px;
+  margin: 10px
 }
 
   </style>
