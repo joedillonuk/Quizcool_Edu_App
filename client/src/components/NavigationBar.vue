@@ -5,20 +5,16 @@
       <button type="button" v-on:click.once="handleCategory(21)">Sport</button>
       <button type="button" v-on:click.once="handleCategory(23)">History</button>
       <button type="button" v-on:click.once="handleCategory(9)">General Knowledge</button>
-
-
-      <select v-on:change="handleSelectUser" v-model="selectedUser">
-        <option disabled value="" selected>Select a user...</option>
-        <option v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
-      </select>
-
-
+<user-details/>
     </nav>
+
   </div>
 </template>
 
 <script>
 import { eventBus } from '../main.js'
+import UserDetails from './UserDetails.vue'
+
 export default {
   name: 'navigation-bar',
   props: ['users'],
@@ -33,9 +29,6 @@ export default {
     handleCategory(category){
       this.selectedCategory = category
       eventBus.$emit('category-selected', this.selectedCategory)
-    },
-    handleSelectUser(){
-      eventBus.$emit('user-selected', this.selectedUser)
     }
 
   },
@@ -45,6 +38,9 @@ export default {
     .then(data => this.categories = data.trivia_categories)
 
 
+  },
+  components: {
+    'user-details': UserDetails
   }
 }
 </script>

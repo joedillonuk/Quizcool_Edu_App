@@ -33,7 +33,6 @@
     data(){
       return {
         answer: null
-        // userScore: 0
       }
     },
     computed: {
@@ -46,15 +45,6 @@
       }
     },
     methods: {
-      // The below has now been replaced with a computed value.
-
-      // decideAnswer: function(){
-      //   if (this.answer === this.question.correct_answer && this.userScore === 0){
-      //     this.userScore += 1
-      //   } else {
-      //     this.userScore = this.userScore
-      //   }
-      // },
       sendScore() {
         if(this.answer){
           eventBus.$emit('send-score', this.userScore)
