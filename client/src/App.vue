@@ -1,7 +1,9 @@
 <template lang="html">
 <div>
 <home-page v-if="!selectedUser"/>
+
 <navigation-bar v-if="selectedUser"/>
+<user-details :selectedUser="selectedUser" v-if="selectedUser"/>
 <!-- <navigation-bar/> -->
 
 
@@ -15,6 +17,7 @@ import NavigationBar from "./components/NavigationBar.vue";
 import QuestionGrid from "./components/QuestionGrid.vue";
 import QuestionItem from "./components/QuestionItem.vue";
 import HomePage from './components/HomePage.vue'
+import UserDetails from './components/UserDetails.vue'
 
 
 import { eventBus } from "./main.js";
@@ -31,7 +34,8 @@ export default {
   components: {
     "navigation-bar": NavigationBar,
     "question-grid": QuestionGrid,
-    'home-page': HomePage
+    'home-page': HomePage,
+    'user-details': UserDetails
   },
 
   mounted() {

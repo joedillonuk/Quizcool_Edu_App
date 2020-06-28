@@ -1,7 +1,7 @@
 <template lang="html">
 <div class="">
   <p>Welcome</p>
-  <!-- <user-details/> -->
+  <!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
   <select v-on:change="handleSelectUser" v-model="selectedUser">
     <option class="main-font" disabled value="" selected>Select a user...</option>
     <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
