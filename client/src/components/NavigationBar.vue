@@ -5,7 +5,6 @@
       <button type="button" v-on:click.once="handleCategory(21)">Sport</button>
       <button type="button" v-on:click.once="handleCategory(23)">History</button>
       <button type="button" v-on:click.once="handleCategory(9)">General Knowledge</button>
-<user-details/>
     </nav>
 
   </div>

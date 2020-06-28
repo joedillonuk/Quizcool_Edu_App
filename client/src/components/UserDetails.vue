@@ -5,6 +5,7 @@
     <option v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
 
   </select>
+
   <h2>You have answered {{currentScore.length}} questions.</h2>
   <h2 v-if="currentScore.length">Your score is {{totalScore}}.</h2>
   <h2 v-if="percentage">You have answered {{percentage}}% of questions right.</h2>
@@ -34,6 +35,12 @@ export default {
       eventBus.$on("send-score", score => {
         this.currentScore.push(score);
       });
+      eventBus.$on('new-user', (payload) => {
+        UserService.updateUser(payload)
+        .then(user => {this.users.push(user),
+      this.selectedUser = user})
+      this.handleSelectUser()
+      })
 
   },
   computed: {

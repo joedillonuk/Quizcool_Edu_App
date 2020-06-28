@@ -1,21 +1,23 @@
-const baseURL = 'http://localhost:3000/api/users'
+const baseURL = 'http://localhost:3000/api/users';
 
 export default {
-  getUsers(){
+  getUsers() {
     return fetch(baseURL)
-    .then(res => res.json())
+    .then(res => res.json());
   },
-  updateUser(user){
-    return fetch( baseURL, {
-      method: "POST",
+
+  updateUser(user) {
+    return fetch(baseURL, {
+      method: 'POST',
       body: JSON.stringify(user),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
     })
-    .then(res => res.json())
+    .then(res => res.json());
   },
-  deleteUser(id){
+
+  deleteUser(id) {
     return fetch(baseURL + id, {
-      method: "DELETE"
-    })
-  }
-}
+      method: 'DELETE',
+    });
+  },
+};
