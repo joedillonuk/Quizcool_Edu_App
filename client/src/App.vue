@@ -7,10 +7,14 @@
 <div v-if="!completedQuiz">
 <user-details :selectedUser="selectedUser" v-if="selectedUser"/>
 <!-- <navigation-bar/> -->
+<select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
+  <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
+</select>
 <question-grid :questions = "questions"/>
 </div>
 <div v-if="completedQuiz">
-Well done!
+<user-details :selectedUser="selectedUser"/>
+<results />
 </div>
 </div>
 </template>
@@ -21,6 +25,7 @@ import QuestionGrid from "./components/QuestionGrid.vue";
 import QuestionItem from "./components/QuestionItem.vue";
 import HomePage from './components/HomePage.vue'
 import UserDetails from './components/UserDetails.vue'
+import Results from './components/Results.vue'
 
 
 import { eventBus } from "./main.js";
@@ -32,14 +37,16 @@ export default {
       questions: [],
       selectedCategory: null,
       selectedUser: null,
-      completedQuiz: null
+      completedQuiz: null,
+      selectedDifficulty: "easy"
     };
   },
   components: {
     "navigation-bar": NavigationBar,
     "question-grid": QuestionGrid,
     'home-page': HomePage,
-    'user-details': UserDetails
+    'user-details': UserDetails,
+    'results': Results
   },
 
   mounted() {
@@ -57,7 +64,7 @@ export default {
 
 
       fetch(
-        `https://opentdb.com/api.php?amount=3&category=${this.selectedCategory}&difficulty=easy&type=boolean`
+        `https://opentdb.com/api.php?amount=3&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=boolean`
       )
         .then(res => res.json())
         .then(data => {

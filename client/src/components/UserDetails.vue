@@ -1,12 +1,16 @@
 <template lang="html">
   <div v-if="selectedUser">
-    <h2>Hi, {{selectedUser.name}}</h2>
-    <h2>total points: {{selectedUser.points}}</h2>
-    <h2>level: {{selectedUser.level}}</h2>
-    <button type="button" name="button" v-on:click="logOut">Log out</button>
-    <h2 class="main-font">You have answered {{currentScore.length}} questions.</h2>
-    <h2 class="main-font" v-if="currentScore.length">Your score is {{totalScore}}.</h2>
-    <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2>
+    <div v-if="completedQuiz">
+      <h1>Well done {{selectedUser.name}}!</h1>
+      <h2>You scored {{this.totalScore}}.</h2>
+      <h2>Level: {{selectedUser.level.length}}</h2>
+      <!-- <button type="button" name="button" v-on:click="logOut">Log out</button> -->
+      <p class="main-font">You have answered {{currentScore.length}} questions.</p>
+      <p class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</p>
+    </div>
+    <div v-if="!completedQuiz">
+      <h2 class="main-font" v-if="currentScore.length">Your score is {{totalScore}}.</h2>
+    </div>
   </div>
 </template>
 
@@ -25,8 +29,12 @@ export default {
   mounted(){
     eventBus.$on("send-score", score => {
       this.currentScore.push(score);
-
+      if(this.totalScore > this.selectedUser.highScore){
+        this.selectedUser.highScore = this.totalScore
+        this.postUserScore()
+      }
       this.sendResult()
+
     });
 
 
@@ -70,6 +78,13 @@ export default {
       do {
         currentDate = Date.now();
       } while (currentDate - date < milliseconds);
+    },
+    postUserScore: function(){
+      let id = this.selectedUser._id;
+      const user = {
+        highScore: this.selectedUser.highScore
+      }
+      UserService.updateExistingUser(id, user)
     }
   }
 }

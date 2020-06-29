@@ -24,8 +24,8 @@ export default {
   data(){
     return{
       name: null,
-      level: 0,
-      points: 0,
+      level: ["easy"],
+      highScore: 0,
       selectedUser: null,
       users: []
     }
@@ -45,7 +45,7 @@ export default {
       const payload = {
         name: this.name,
         level: this.level,
-        points: this.points
+        highScore: this.highScore
       }
       UserService.updateUser(payload)
       .then(user => {this.users.push(user)
