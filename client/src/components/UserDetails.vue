@@ -1,8 +1,14 @@
 <template lang="html">
 <div>
+  <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
+  <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
+  <!-- <label for="">Level:</label>
+  <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
+    <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
+  </select> -->
         <div class="navbar-item has-dropdown is-hoverable" v-if="selectedUser">
-          <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
-          <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
+
+          <!-- <p class="main-font navbar-item" >Level: {{selectedUser.level}}</p> -->
 
           <a class="navbar-link">
             {{selectedUser.name}}
