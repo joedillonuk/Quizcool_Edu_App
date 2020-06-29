@@ -18,7 +18,6 @@
       <img v-if="this.selectedCategory !== 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-bw.png" alt="science">
       <img v-if="this.selectedCategory === 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-color.png" alt="science">
 
-<user-details/>
     </nav>
 
   </div>
