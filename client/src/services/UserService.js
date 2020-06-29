@@ -15,18 +15,17 @@ updateUser(user) {
   .then(res => res.json());
 },
 
-deleteUser(id) {
-  return fetch(baseURL + id, {
-    method: 'DELETE',
-  });
-},
-
-updateExistingUser(id, data){
+  deleteUser(id) {
+    return fetch(baseURL + id, {
+      method: 'DELETE',
+    });
+  },
+  updateExistingUser(id, data){
   return fetch(baseURL + id, {
     method: "PUT",
     body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
+    headers: {"Content-Type": "application/json"}
   })
-.then(res => res.json())
+  .then(res => res.json())
 }
 };
