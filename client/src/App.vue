@@ -4,20 +4,17 @@
 <home-page v-if="!selectedUser"/>
 <div >
   <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
-  <!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
+
 </div>
 
 <div v-if="!completedQuiz">
-<!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
-<!-- <navigation-bar/> -->
 <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
   <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
 </select>
 <question-grid :questions = "questions" v-if="selectedCategory"/>
 </div>
 <div v-if="completedQuiz">
-<!-- <user-details :selectedUser="selectedUser"/> -->
-<results :selectedUser="selectedUser"/>
+<results :currentScore="currentScore"/>
 </div>
 </div>
 </template>
@@ -41,7 +38,8 @@ export default {
       selectedCategory: null,
       selectedUser: null,
       completedQuiz: null,
-      selectedDifficulty: "easy"
+      selectedDifficulty: "easy",
+      currentScore: []
     };
   },
   components: {
@@ -64,7 +62,9 @@ export default {
         this.completedQuiz = quiz
       })
 
-
+      eventBus.$on('current-score', result =>
+        this.currentScore = result
+      )
 
       fetch(
         `https://opentdb.com/api.php?amount=3&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=boolean`
