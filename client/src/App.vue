@@ -1,5 +1,5 @@
 <template lang="html">
-<div>
+<div class="bkg" height="100%">
 <home-page v-if="!selectedUser"/>
 
 <navigation-bar v-if="selectedUser"/>
@@ -7,7 +7,7 @@
 <!-- <navigation-bar/> -->
 
 
-<question-grid :questions = "questions"/>
+<question-grid :questions = "questions" v-if="selectedUser"/>
 
 </div>
 </template>
@@ -66,5 +66,9 @@ export default {
 .main-font {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
+}
+.bkg{
+  background-size: cover;
+  background-image: url('./assets/backgrounds/home.jpeg');
 }
 </style>

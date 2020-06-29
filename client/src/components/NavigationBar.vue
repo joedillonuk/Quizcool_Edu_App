@@ -1,24 +1,25 @@
 <template lang="html">
   <div >
-    <nav>
+    <nav class="navbar">
       <!-- <button type="button" v-on:click.once="handleCategory(22)">Geography</button>
       <button type="button" v-on:click.once="handleCategory(21)">Sport</button>
       <button type="button" v-on:click.once="handleCategory(23)">History</button>
       <button type="button" v-on:click.once="handleCategory(9)">General Knowledge</button> -->
+      <div class="container">
+        <img v-if="this.selectedCategory !== 22" v-on:click.once="handleCategory(22)" src="../assets/icons/geography-bw.png" alt="geography">
+        <img v-if="this.selectedCategory === 22" v-on:click.once="handleCategory(22)" src="../assets/icons/geography-color.png" alt="geography">
 
-      <img v-if="this.selectedCategory !== 22" v-on:click.once="handleCategory(22)" src="../assets/icons/geography-bw.png" alt="geography">
-      <img v-if="this.selectedCategory === 22" v-on:click.once="handleCategory(22)" src="../assets/icons/geography-color.png" alt="geography">
+        <img v-if="this.selectedCategory !== 21" v-on:click.once="handleCategory(21)" src="../assets/icons/sport-bw.png" alt="sport">
+        <img v-if="this.selectedCategory === 21" v-on:click.once="handleCategory(21)" src="../assets/icons/sport-color.png" alt="sport">
 
-      <img v-if="this.selectedCategory !== 21" v-on:click.once="handleCategory(21)" src="../assets/icons/sport-bw.png" alt="sport">
-      <img v-if="this.selectedCategory === 21" v-on:click.once="handleCategory(21)" src="../assets/icons/sport-color.png" alt="sport">
+        <img v-if="this.selectedCategory !== 23" v-on:click.once="handleCategory(23)" src="../assets/icons/history-bw.png" alt="history">
+        <img v-if="this.selectedCategory === 23" v-on:click.once="handleCategory(23)" src="../assets/icons/history-color.png" alt="history">
 
-      <img v-if="this.selectedCategory !== 23" v-on:click.once="handleCategory(23)" src="../assets/icons/history-bw.png" alt="history">
-      <img v-if="this.selectedCategory === 23" v-on:click.once="handleCategory(23)" src="../assets/icons/history-color.png" alt="history">
+        <img v-if="this.selectedCategory !== 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-bw.png" alt="science">
+        <img v-if="this.selectedCategory === 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-color.png" alt="science">
 
-      <img v-if="this.selectedCategory !== 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-bw.png" alt="science">
-      <img v-if="this.selectedCategory === 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-color.png" alt="science">
-
-<user-details/>
+        <user-details/>
+      </div>
     </nav>
 
   </div>
@@ -62,5 +63,9 @@ export default {
 img {
   width: 40px;
   margin: 10px
+}
+
+.navbar{
+  background-color: #e7dfd5;
 }
 </style>
