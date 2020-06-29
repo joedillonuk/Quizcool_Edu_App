@@ -26,13 +26,18 @@ props: ['selectedUser'],
   mounted(){
       eventBus.$on("send-score", score => {
         this.currentScore.push(score);
+        this.selectedUser.points += score
       });
-      // eventBus.$on('new-user', (payload) => {
-    //     UserService.updateUser(payload)
-    //     .then(user => {this.users.push(user)
-    //       ,
+
+    // eventBus.$on('new-user', (payload) => {
+    //   UserService.updateUser(payload)
+    //   .then(user => {
+    //   this.users.push(user),
     //   this.selectedUser = user
     // })
+
+
+
 
       },
   computed: {
@@ -41,8 +46,23 @@ props: ['selectedUser'],
     },
     percentage: function() {
       return Math.round((100 / this.currentScore.length) * this.totalScore);
+    },
+    sendScore: function(){
+      if (this.currentScore.length === 3){
+        return this.postUserScore();
+      }
     }
   },
+  methods: {
+    postUserScore(){
+      let points = (this.selectedUser.points += this.totalScore);
+      let id = this.selectedUser._id;
+      const user = {
+        points: points
+      }
+      UserService.updateExistingUser(id, user)
+    }
+  }
 }
 </script>
 
