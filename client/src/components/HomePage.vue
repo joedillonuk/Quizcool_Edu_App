@@ -1,18 +1,29 @@
 <template lang="html">
-<div class="">
-  <p>Welcome</p>
-  <!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
-  <select v-on:change="handleSelectUser" v-model="selectedUser">
-    <option class="main-font" disabled value="" selected>Select a user...</option>
-    <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
-  </select>
-  <p>create new user</p>
-  <form v-on:submit="createUser">
-  <label for="">Name</label>
-  <input type="text" v-model="name">
-  <input type="submit" value="Add User">
-  </form>
-</div>
+  <div>
+    <div class="columns">
+      <div class="column is-one-third"></div>
+      <div class="card column is-one-third">
+        <header class="card-header">
+          <p class="card-header-title is-centered">Welcome</p>
+        </header>
+        <div class="card-content">
+          <div class="content is-centered">
+            <select v-on:change="handleSelectUser" v-model="selectedUser">
+              <option class="main-font" disabled value="" selected>Select a user...</option>
+              <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
+            </select>
+            <p>create new user</p>
+            <form v-on:submit="createUser">
+              <input placeholder="Enter Name" type="text" v-model="name">
+              <input class="" type="submit" value="Add User">
+            </form>
+            </div>
+            <div class="column is-one-third"></div>
+          </div>
+        </div>
+
+    </div>
+  </div>
 </template>
 
 <script>
@@ -31,13 +42,13 @@ export default {
     }
   },
   mounted(){
-      UserService.getUsers().then(users => (this.users = users));
-    },
+    UserService.getUsers().then(users => (this.users = users));
+  },
   methods:{
 
-      handleSelectUser(){
-        eventBus.$emit('user-selected', this.selectedUser)
-      },
+    handleSelectUser(){
+      eventBus.$emit('user-selected', this.selectedUser)
+    },
 
 
     createUser(event){
@@ -50,9 +61,9 @@ export default {
       UserService.updateUser(payload)
       .then(user => {this.users.push(user)
         ,
-    this.selectedUser = user.name
-  })
-    this.name = ''
+        this.selectedUser = user.name
+      })
+      this.name = ''
     }
   },
   components:{
@@ -62,4 +73,14 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.card{
+  margin-top: 200px;
+  margin-bottom: 250px;
+  /* margin-right: 100px; */
+  text-align: center;
+  background-color: #ffe680;
+}
+/* .background{
+  background-image: url('../assets/backgrounds/home.jpeg');
+} */
 </style>

@@ -1,20 +1,23 @@
 <template lang="html">
-<div>
+<div class="bkg">
 
 <home-page v-if="!selectedUser"/>
+<div >
+  <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
+  <!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
+</div>
 
-<navigation-bar v-if="selectedUser"/>
 <div v-if="!completedQuiz">
-<user-details :selectedUser="selectedUser" v-if="selectedUser"/>
+<!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
 <!-- <navigation-bar/> -->
 <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
   <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
 </select>
-<question-grid :questions = "questions"/>
+<question-grid :questions = "questions" v-if="selectedCategory"/>
 </div>
 <div v-if="completedQuiz">
-<user-details :selectedUser="selectedUser"/>
-<results />
+<!-- <user-details :selectedUser="selectedUser"/> -->
+<results :selectedUser="selectedUser"/>
 </div>
 </div>
 </template>
@@ -85,9 +88,13 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .main-font {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
+}
+.bkg{
+  background-size: cover;
+  background-image: url('./assets/backgrounds/home.jpeg');
 }
 </style>

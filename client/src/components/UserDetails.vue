@@ -1,17 +1,33 @@
 <template lang="html">
-  <div v-if="selectedUser">
-    <div v-if="completedQuiz">
-      <h1>Well done {{selectedUser.name}}!</h1>
-      <h2>You scored {{this.totalScore}}.</h2>
-      <h2>Level: {{selectedUser.level.length}}</h2>
-      <!-- <button type="button" name="button" v-on:click="logOut">Log out</button> -->
-      <p class="main-font">You have answered {{currentScore.length}} questions.</p>
-      <p class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</p>
-    </div>
-    <div v-if="!completedQuiz">
-      <h2 class="main-font" v-if="currentScore.length">Your score is {{totalScore}}.</h2>
-    </div>
+<div>
+        <div class="navbar-item has-dropdown is-hoverable" v-if="selectedUser">
+          <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
+          <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
+
+          <a class="navbar-link">
+            {{selectedUser.name}}
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" v-on:click="logOut">
+              Log Out
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" v-on:click="">
+              Delete Account
+            </a>
+          </div>
+          <div class="">
+            <!-- <a class="main-font navbar-item" >Total Points: {{selectedUser.points}}.</a> -->
+          </div>
+          <!-- <p class="main-font navbar-item" >Total Points: {{selectedUser.points}}.</p> -->
+
+    <!-- <h2 class="main-font">You have answered {{currentScore.length}} questions.</h2>
+    <h2 class="main-font" v-if="currentScore.length">Your score is {{totalScore}}.</h2>
+    <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2> -->
   </div>
+</div>
+
 </template>
 
 <script>
@@ -38,12 +54,6 @@ export default {
     });
 
 
-    // eventBus.$on('new-user', (payload) => {
-    //     UserService.updateUser(payload)
-    //     .then(user => {this.users.push(user)
-    //       ,
-    //   this.selectedUser = user
-    // })
 
   },
   computed: {

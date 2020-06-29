@@ -1,9 +1,12 @@
 <template lang="html">
-<div class="question-font">
+<div class="question-font columns">
+  <div class="column is-one-third"></div>
+  <div class="card column is-one-third card-bkg">
 <ol v-for=" question in questions" >
   <question-item :question="question"/>
 </ol>
-<!-- <button v-on:submit="addUserScore" type="button" name="button">Finish</button> -->
+</div>
+<div class="column is-one-third"></div>
 </div>
 </template>
 
@@ -22,5 +25,14 @@ export default {
 .question-font{
   font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
+}
+.card{
+  margin-top: 80px;
+  /* box-shadow: 5px 10px green; */
+
+}
+.card-bkg{
+  background-color: #e8e4e1;
+  /* opacity: 0.5; */
 }
 </style>
