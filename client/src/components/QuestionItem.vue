@@ -38,24 +38,37 @@
     props: ['question'],
     data(){
       return {
-        answer: null
+        answer: null,
+        userScore: 0
       }
     },
     computed: {
-      userScore: function(){
-        let score = 0;
-        if (this.answer === this.question.correct_answer){
-          score += 1
-        }
-        return score
-      }
+      // userScore: function(){
+      //   let score = 0;
+      //   if (this.answer === this.question.correct_answer){
+      //     score += 1
+      //   }
+      //   return score
+      // }
     },
     methods: {
       sendScore() {
-        if(this.answer){
+          if (this.answer === this.question.correct_answer){
+            this.userScore += 1
+          }
+
+        if (this.answer){
           eventBus.$emit('send-score', this.userScore)
         }
+        // this.sleep(3000)
       },
+      // sleep: function(milliseconds) {
+      //   const date = Date.now();
+      //   let currentDate = null;
+      //   do {
+      //     currentDate = Date.now();
+      //   } while (currentDate - date < milliseconds);
+      // },
 
       escapeHtml(question) {
         return question
@@ -70,7 +83,8 @@
     mounted() {
       eventBus.$on('category-selected', (category) => {
       this.answer = null})
-    }
+    },
+
   }
   </script>
 

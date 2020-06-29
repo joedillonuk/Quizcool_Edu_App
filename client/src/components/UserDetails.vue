@@ -25,14 +25,18 @@ export default {
   mounted(){
     eventBus.$on("send-score", score => {
       this.currentScore.push(score);
+
       this.sendResult()
     });
+
+
     // eventBus.$on('new-user', (payload) => {
     //     UserService.updateUser(payload)
     //     .then(user => {this.users.push(user)
     //       ,
     //   this.selectedUser = user
     // })
+
   },
   computed: {
     totalScore: function() {
@@ -49,6 +53,7 @@ export default {
         return false
       }
     },
+
   },
   methods:{
     logOut(){
