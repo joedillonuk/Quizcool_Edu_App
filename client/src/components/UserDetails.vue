@@ -1,13 +1,31 @@
 <template lang="html">
-  <div v-if="selectedUser">
-    <h2>Hi, {{selectedUser.name}}</h2>
-    <h2>total points: {{selectedUser.points}}</h2>
-    <h2>level: {{selectedUser.level}}</h2>
-    <button type="button" name="button" v-on:click="logOut">Log out</button>
-    <h2 class="main-font">You have answered {{currentScore.length}} questions.</h2>
+
+        <div class="navbar-item has-dropdown is-hoverable" v-if="selectedUser">
+          <p class="main-font navbar-item" >Total Points: {{selectedUser.points}}.</p>
+
+          <a class="navbar-link">
+            {{selectedUser.name}}
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" v-on:click="logOut">
+              Log Out
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" v-on:click="">
+              Delete Account
+            </a>
+          </div>
+          <div class="">
+            <!-- <a class="main-font navbar-item" >Total Points: {{selectedUser.points}}.</a> -->
+          </div>
+          <!-- <p class="main-font navbar-item" >Total Points: {{selectedUser.points}}.</p> -->
+
+    <!-- <h2 class="main-font">You have answered {{currentScore.length}} questions.</h2>
     <h2 class="main-font" v-if="currentScore.length">Your score is {{totalScore}}.</h2>
-    <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2>
+    <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2> -->
   </div>
+
 </template>
 
 <script>
@@ -30,12 +48,6 @@ export default {
     });
 
 
-    // eventBus.$on('new-user', (payload) => {
-    //     UserService.updateUser(payload)
-    //     .then(user => {this.users.push(user)
-    //       ,
-    //   this.selectedUser = user
-    // })
 
   },
   computed: {

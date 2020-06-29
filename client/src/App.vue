@@ -1,13 +1,16 @@
 <template lang="html">
-<div>
+<div class="bkg">
 
 <home-page v-if="!selectedUser"/>
+<div >
+  <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
+  <!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
+</div>
 
-<navigation-bar v-if="selectedUser"/>
 <div v-if="!completedQuiz">
-<user-details :selectedUser="selectedUser" v-if="selectedUser"/>
+<!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
 <!-- <navigation-bar/> -->
-<question-grid :questions = "questions"/>
+<question-grid :questions = "questions" v-if="selectedCategory"/>
 </div>
 <div v-if="completedQuiz">
 Well done!
@@ -78,7 +81,7 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .main-font {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
