@@ -1,14 +1,17 @@
 <template lang="html">
-<div class="bkg" height="100%">
+<div>
+
 <home-page v-if="!selectedUser"/>
 
 <navigation-bar v-if="selectedUser"/>
+<div v-if="!completedQuiz">
 <user-details :selectedUser="selectedUser" v-if="selectedUser"/>
 <!-- <navigation-bar/> -->
-
-
-<question-grid :questions = "questions" v-if="selectedUser"/>
-
+<question-grid :questions = "questions"/>
+</div>
+<div v-if="completedQuiz">
+Well done!
+</div>
 </div>
 </template>
 
@@ -28,7 +31,8 @@ export default {
     return {
       questions: [],
       selectedCategory: null,
-      selectedUser: null
+      selectedUser: null,
+      completedQuiz: null
     };
   },
   components: {
@@ -45,7 +49,10 @@ export default {
     eventBus.$on("category-selected", category => {
       this.selectedCategory = category;
 
-
+      eventBus.$on('quiz-completed', (quiz) => {
+        // this.sleep(3000)
+        this.completedQuiz = quiz
+      })
 
 
 
@@ -57,6 +64,15 @@ export default {
           this.questions = data.results;
         });
     })
+  },
+  methods: {
+    sleep: function(milliseconds) {
+      const date = Date.now();
+      let currentDate = null;
+      do {
+        currentDate = Date.now();
+      } while (currentDate - date < milliseconds);
+    }
   }
 
 };
