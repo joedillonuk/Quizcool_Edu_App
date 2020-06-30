@@ -39,34 +39,44 @@ export default {
   name: 'user-details',
   data(){
     return {
-      currentScore: []
+      currentScore: [],
+      puzzleScore: null
+
     }
   },
   props: ['selectedUser'],
   mounted(){
+    // added 'puzzle-result' eventBus. This is being added in the totalScore below.
+        eventBus.$on('puzzle-result', (result)=>{
+          this.puzzleScore = result
+          this.updateIfHighScore()
+        })
+
     eventBus.$on("send-score", score => {
       this.currentScore.push(score)
 
-      if(this.totalScore > this.selectedUser.highScore){
-        this.selectedUser.highScore = this.totalScore
-        this.postUserScore()
-      }
+
+      this.updateIfHighScore()
       this.sendResult()
       this.sendScore()
     });
 
 
 
+
   },
   computed: {
+
+    // updated totalScore to include the completed puzzleScore
+    // puzzleScore is being added via the mounted 'puzzle-result' eventBus
     totalScore: function() {
-      return this.currentScore.reduce((sum, current) => sum + current, 0);
+      return (this.currentScore.reduce((sum, current) => sum + current, 0)) + this.puzzleScore;
     },
     percentage: function() {
       return Math.round((100 / this.currentScore.length) * this.totalScore);
     },
     completedQuiz: function(){
-      if (this.currentScore.length == 3){
+      if (this.currentScore.length == 5){
         // this.sleep(3000)
         return true
       } else {
@@ -105,6 +115,12 @@ export default {
         highScore: this.selectedUser.highScore
       }
       UserService.updateExistingUser(id, user)
+    },
+    updateIfHighScore: function(){
+      if(this.totalScore > this.selectedUser.highScore){
+        this.selectedUser.highScore = this.totalScore
+        this.postUserScore()
+      }
     }
   }
 }

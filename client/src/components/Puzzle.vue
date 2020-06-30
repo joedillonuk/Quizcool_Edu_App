@@ -269,7 +269,7 @@ export default {
         this.puzzleScore = (2 * this.difficulty)
         // setTimeout(this.gameOver,500);
         this.createTitle("You did it!")
-        setTimeout(this.gameOver,1500);
+        setTimeout(this.gameOver,2000);
       }
     },
     gameOver(){
