@@ -3,15 +3,15 @@
 
 <home-page v-if="!selectedUser"/>
 <div >
-  <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
+<navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
 
 </div>
-<welcome-page v-if="!selectedCategory"  :selectedUser="selectedUser"/>
+<welcome-page v-if="!selectedCategory && !selectedDifficulty"  :selectedUser="selectedUser"/>
 <div v-if="!completedQuiz">
 <!-- <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
   <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
 </select> -->
-<question-grid :questions = "questions" v-if="selectedCategory "/>
+<question-grid :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
 </div>
 <div v-if="completedQuiz">
 <results :currentScore="currentScore"/>
@@ -39,7 +39,7 @@ export default {
       selectedCategory: null,
       selectedUser: null,
       completedQuiz: null,
-      selectedDifficulty: 'easy',
+      selectedDifficulty: null,
       currentScore: []
     };
   },
@@ -52,9 +52,14 @@ export default {
     'welcome-page': WelcomePage
   },
 
+
+
   mounted() {
     eventBus.$on('user-selected', (user)=>{
       this.selectedUser = user
+    })
+    eventBus.$on('selected-difficulty', (level) => {
+      this.selectedDifficulty = level
     })
     eventBus.$on("category-selected", category => {
       this.selectedCategory = category;
@@ -68,10 +73,7 @@ export default {
         this.currentScore = result
       })
 
-      eventBus.$on('selected-difficulty', (level) => {
-        this.selectedDifficulty = level
-        console.log('level', level);
-      })
+
 
       fetch(
         `https://opentdb.com/api.php?amount=3&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=boolean`
@@ -81,6 +83,7 @@ export default {
           this.questions = data.results;
         });
     })
+
   },
   methods: {
     sleep: function(milliseconds) {
@@ -89,13 +92,16 @@ export default {
       do {
         currentDate = Date.now();
       } while (currentDate - date < milliseconds);
-    }
+    },
+    onListUpdated(level){
+     this.selectedDifficulty = level
+  }
   }
 
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .main-font {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;

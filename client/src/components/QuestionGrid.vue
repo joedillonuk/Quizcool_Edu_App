@@ -21,14 +21,14 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .question-font{
   font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
 }
 .card{
   margin-top: 80px;
-  /* box-shadow: 5px 10px green; */
+  margin-bottom: 200px;
 
 }
 .card-bkg{

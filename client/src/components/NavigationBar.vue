@@ -79,7 +79,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 img {
   width: 30px;
   margin: 10px
