@@ -29,11 +29,6 @@
 
 <script>
 import { eventBus } from '../main.js'
-<<<<<<< HEAD
-
-=======
->>>>>>> aae3b514306ad08fbc4a4add835b64a6b72cbc2f
-
 export default {
   name: 'puzzle',
   data(){
@@ -287,17 +282,6 @@ export default {
     sendPuzzleResult(){
       eventBus.$emit('puzzle-result', this.puzzleScore)
     },
-<<<<<<< HEAD
-=======
-
-    
-
-
-
-
-
-
->>>>>>> aae3b514306ad08fbc4a4add835b64a6b72cbc2f
 
     playAudio(audio) {
       audio.pause();
@@ -340,10 +324,5 @@ img{
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-}
-
-img {
-  height: 500px;
-  width: 500px;
 }
 </style>

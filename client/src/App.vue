@@ -63,8 +63,8 @@ export default {
   mounted() {
     eventBus.$on('puzzle-result', (result)=>{
       this.puzzleScore = result
-      this.currentScore.push(result)
-    
+
+
     })
     eventBus.$on('user-selected', (user)=>{
       this.selectedUser = user
