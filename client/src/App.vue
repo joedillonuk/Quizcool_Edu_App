@@ -101,13 +101,7 @@ export default {
 }
 .bkg{
   background-size: cover;
-<<<<<<< HEAD
-  background-color: #FFDB58;
-  /* background-image: url('./assets/backgrounds/home.jpeg'); */
-
-=======
   background-image: url('./assets/backgrounds/home.jpg');
->>>>>>> c1a66ec23345f447f85c5468bd7a634e0d76b5fc
 }
 
 </style>

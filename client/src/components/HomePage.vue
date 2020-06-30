@@ -90,7 +90,7 @@ export default {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
 }
-/* .background{
-  background-image: url('../assets/backgrounds/home.jpeg');
-} */
+.background{
+  background-image: url('../assets/backgrounds/home.jpg');
+}
 </style>
