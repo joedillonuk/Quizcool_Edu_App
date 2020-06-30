@@ -116,9 +116,18 @@ export default {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
 }
-.bkg{
+.bkg {
+  background: url('./assets/backgrounds/home.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 900px;
+}
+/* .bkg{
   background-size: cover;
   background-image: url('./assets/backgrounds/home.jpg');
-}
+  height: 900px;
+} */
 
 </style>
