@@ -19,6 +19,10 @@
 <!-- <user-details :selectedUser="selectedUser"/> -->
 <results :selectedUser="selectedUser"/>
 </div>
+<div class="center" v-if="completedQuiz">
+  <puzzle/>
+</div>
+
 </div>
 </template>
 
@@ -29,6 +33,7 @@ import QuestionItem from "./components/QuestionItem.vue";
 import HomePage from './components/HomePage.vue'
 import UserDetails from './components/UserDetails.vue'
 import Results from './components/Results.vue'
+import Puzzle from './components/Puzzle.vue'
 
 
 import { eventBus } from "./main.js";
@@ -49,7 +54,8 @@ export default {
     "question-grid": QuestionGrid,
     'home-page': HomePage,
     'user-details': UserDetails,
-    'results': Results
+    'results': Results,
+    'puzzle': Puzzle
   },
 
   mounted() {
@@ -95,6 +101,9 @@ export default {
 }
 .bkg{
   background-size: cover;
-  background-image: url('./assets/backgrounds/home.jpeg');
+  background-color: #FFDB58;
+  /* background-image: url('./assets/backgrounds/home.jpeg'); */
+
 }
+
 </style>
