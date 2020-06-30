@@ -43,11 +43,11 @@ export default {
   mounted(){
 
     this.postPuzzleScore()
-    
+
     UserService.getUsers()
     .then(users => (this.users = users))
 
-
+//test
     // this.sortUsers();
 
   },
