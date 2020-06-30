@@ -103,8 +103,8 @@
 } */}
 
 img {
-  width: 40px;
-  margin: 10px
+  width: 175px;
+  margin: 0px;
 }
 
   </style>
