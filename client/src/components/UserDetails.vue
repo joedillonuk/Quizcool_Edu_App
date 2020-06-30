@@ -66,7 +66,7 @@ export default {
       return Math.round((100 / this.currentScore.length) * this.totalScore);
     },
     completedQuiz: function(){
-      if (this.currentScore.length == 3){
+      if (this.currentScore.length == 10){
         // this.sleep(3000)
         return true
       } else {

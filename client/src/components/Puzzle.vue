@@ -316,4 +316,9 @@ export default {
   margin-right: auto;
   width: 50%;
 }
+
+img {
+  height: 500px;
+  width: 500px;
+}
 </style>

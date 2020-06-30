@@ -80,7 +80,11 @@
         .replace(/&gt;/g, ">")
         .replace(/&quot;/g, "")
         .replace(/&#039;/g, "'")
-        .replace(/&deg;/g, "°");
+        .replace(/&deg;/g, "°")
+        .replace(/&Pi;/g, "π")
+        .replace(/&Sigma;/g, "Σ")
+        .replace(/&Omicron;/g, "Ο")
+        .replace(/&Nu;/g, "Ν");
       },
 
       getAnswers(){
