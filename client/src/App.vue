@@ -6,13 +6,13 @@
   <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
 
 </div>
-<welcome-page v-if="!selectedCategory && !selectedDifficulty"  :selectedUser="selectedUser"/>
-<!-- <div v-if="!completedQuiz">
-<select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
+<welcome-page v-if="!selectedCategory"  :selectedUser="selectedUser"/>
+<div v-if="!completedQuiz">
+<!-- <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
   <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
-</select>
-<question-grid :questions = "questions" v-if="selectedCategory"/>
-</div> -->
+</select> -->
+<question-grid :questions = "questions" v-if="selectedCategory "/>
+</div>
 <div v-if="completedQuiz">
 <results :currentScore="currentScore"/>
 </div>
@@ -39,7 +39,7 @@ export default {
       selectedCategory: null,
       selectedUser: null,
       completedQuiz: null,
-      selectedDifficulty: null,
+      selectedDifficulty: 'easy',
       currentScore: []
     };
   },
@@ -70,6 +70,7 @@ export default {
 
       eventBus.$on('selected-difficulty', (level) => {
         this.selectedDifficulty = level
+        console.log('level', level);
       })
 
       fetch(
