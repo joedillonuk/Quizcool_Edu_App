@@ -36,6 +36,11 @@
           <img v-if="this.selectedCategory === 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-color.png" alt="science">
         </a>
 
+        <a class="navbar-item">
+          <img v-if="this.selectedCategory !== 18" v-on:click.once="handleCategory(18)" src="../assets/icons/computing-bw.png" alt="computing">
+          <img v-if="this.selectedCategory === 18" v-on:click.once="handleCategory(18)" src="../assets/icons/computing-color.png" alt="computing">
+        </a>
+
         <div class="navbar-end">
           <user-details :selectedUser="selectedUser" v-if="selectedUser" class="navbar-item"/>
         </div>
