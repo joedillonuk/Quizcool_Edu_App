@@ -14,7 +14,7 @@
 <question-grid :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
 </div>
 <div v-if="puzzleScore">
-<results :currentScore="currentScore"/>
+<results :currentScore="currentScore" :selectedUser="selectedUser"/>
 </div>
 <div class="center" v-if="completedQuiz">
   <puzzle/>
@@ -64,6 +64,8 @@ export default {
   mounted() {
     eventBus.$on('puzzle-result', (result)=>{
       this.puzzleScore = result
+      this.currentScore.push(result)
+    
     })
     eventBus.$on('user-selected', (user)=>{
       this.selectedUser = user
@@ -86,7 +88,7 @@ export default {
 
 
       fetch(
-        `https://opentdb.com/api.php?amount=10&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=multiple`
+        `https://opentdb.com/api.php?amount=5&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=multiple`
       )
         .then(res => res.json())
         .then(data => {
@@ -103,9 +105,8 @@ export default {
         currentDate = Date.now();
       } while (currentDate - date < milliseconds);
     },
-    onListUpdated(level){
-     this.selectedDifficulty = level
-  }
+
+
   }
 
 };
@@ -122,7 +123,7 @@ export default {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 900px;
+  height: 1500px;
 }
 /* .bkg{
   background-size: cover;

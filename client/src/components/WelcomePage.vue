@@ -6,11 +6,11 @@
       <h3>Are you ready to test your knowledge in :
         Geography,
         Sports,
-        History
-        and Science?<br>
+        History,
+        Science and Computing?<br>
         Are you up for competition with other players?<br>
 
-        Let's select difficulty level first:<br>
+        Let's select difficulty level first, then pick a category:<br>
         <select class="select is-small" v-model="selectedDifficulty"v-on:change="sendLevel">
           <option value="easy" >Select a level...</option>
           <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
