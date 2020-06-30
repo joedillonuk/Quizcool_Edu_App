@@ -2,16 +2,21 @@
   <div class="columns" v-if="selectedUser">
     <div class="column is-one-third"></div>
     <div class="card column is-one-third card-bkg" >
-      <h2>Welcome {{selectedUser.name}}</h2>
-      <h3>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br>
-        Please select difficulty level:
-        <select v-model="selectedDifficulty">
-          <option disabled value="" ></option>
+      <h2>Hi {{selectedUser.name}},</h2>
+      <h3>Are you ready to test your knowledge in :
+        Geography,
+        Sports,
+        History
+        and Science?<br>
+        Are you up for competition with other players?<br>
+
+        Let's select difficulty level first:<br>
+        <select class="select is-small" v-model="selectedDifficulty"v-on:change="sendLevel">
+          <option value="easy" >Select a level...</option>
           <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
         </select>
       </h3>
-      <input type="submit" v-on:click="sendLevel">
+<h4>Once you collect more points more difficulty level will become available</h4>
 
     </div>
     <div class="column is-one-third"></div>
@@ -29,7 +34,7 @@ export default {
     }
   },
   mounted(){
-    
+
   },
   methods:{
     sendLevel(){
