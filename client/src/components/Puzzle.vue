@@ -1,5 +1,17 @@
 <template lang="html">
   <div class="container" v-if="!puzzleCompleted">
+    <audio id="puzzledrop">
+      <source src="../assets/sfx/puzzledrop.wav" type="audio/wav">
+        </audio>
+
+        <audio id="puzzleComplete">
+          <source src="../assets/sfx/puzzleComplete.mp3" type="audio/mpeg">
+          </audio>
+
+          <audio id="thwack">
+            <source src="../assets/sfx/thwack.wav" type="audio/wav">
+              </audio>
+
     <div class="buttoncenter">
       <button class="buttonpadding" v-on:click="initEasy();" type="button" name="button" value="Get pic">Easy Puzzle</button>
       <button class="buttonpadding" v-on:click="initMedium();" type="button" name="button" value="Get pic">Medium Puzzle</button>
@@ -7,7 +19,7 @@
     </div>
     <br><br>
     <div class="center">
-      <img v-if="displayOriginal" id="testImg" src="../assets/puzzles/5.jpg" height="500" width="500" alt="Puzzle Time!">
+      <img v-if="displayOriginal" id="testImg" src="../assets/puzzles/2.jpg" height="500" width="500" alt="Puzzle Time!">
       <canvas id="canvas"></canvas>
     </div>
     <button class="buttonpadding" v-on:click="initAbsurd();" type="button" name="button" value="Get pic">Absurd! DO NOT CLICK!</button>
@@ -17,20 +29,16 @@
 
 <script>
 import { eventBus } from '../main.js'
-
 export default {
   name: 'puzzle',
   data(){
     return{
       puzzleScore: 0,
       puzzleCompleted: false,
-
       difficulty: 3,
       puzzleHover: '#009900',
-
       canvas: null,
       stage: null,
-
       img: "",
       pieces: null,
       puzzleWidth: null,
@@ -39,17 +47,16 @@ export default {
       pieceHeight: null,
       currentPiece: null,
       currentDropPiece: null,
-
       mouse: null,
       displayOriginal: true,
-      imgArray: ["./blippi.jpg", "./castle.jpg", "./taco.jpg"]
+      imgChoice: "../assets/puzzles/2.jpg",
       // imgArray: "./blippi.jpg"
     }
   },
-
   methods: {
     initEasy(){
       this.img = document.getElementById("testImg")
+      console.log(this.img);
       this.onImage();
       this.displayOriginal = false;
     },
@@ -174,6 +181,8 @@ export default {
     checkPieceClicked(){
       let i;
       let piece;
+      let audio = document.getElementById("puzzledrop");
+      this.playAudio(audio);
       for(i = 0;i < this.pieces.length;i++){
         piece = this.pieces[i];
         if(this.mouse.x < piece.xPos || this.mouse.x > (piece.xPos + this.pieceWidth) || this.mouse.y < piece.yPos || this.mouse.y > (piece.yPos + this.pieceHeight)){
@@ -229,15 +238,19 @@ export default {
       document.onmousemove = null;
       document.onmouseup = null;
       if(this.currentDropPiece != null){
+
         var tmp = {xPos:this.currentPiece.xPos,yPos:this.currentPiece.yPos};
         this.currentPiece.xPos = this.currentDropPiece.xPos;
         this.currentPiece.yPos = this.currentDropPiece.yPos;
         this.currentDropPiece.xPos = tmp.xPos;
         this.currentDropPiece.yPos = tmp.yPos;
       }
+
       this.resetPuzzleAndCheckWin();
     },
     resetPuzzleAndCheckWin(){
+      let audio = document.getElementById("thwack");
+      this.playAudio(audio);
       this.stage.clearRect(0,0,this.puzzleWidth,this.puzzleHeight);
       var gameWin = true;
       var i;
@@ -251,12 +264,12 @@ export default {
         }
       }
       if(gameWin){
+        let audio = document.getElementById("puzzleComplete");
+        this.playAudio(audio);
         this.puzzleScore = (2 * this.difficulty)
-
         // setTimeout(this.gameOver,500);
         this.createTitle("You did it!")
         setTimeout(this.gameOver,1500);
-
       }
     },
     gameOver(){
@@ -265,33 +278,29 @@ export default {
       document.onmousedown = null;
       document.onmousemove = null;
       document.onmouseup = null;
-
     },
     sendPuzzleResult(){
       eventBus.$emit('puzzle-result', this.puzzleScore)
     },
 
-    
-
-
-
-
-
-
-
+    playAudio(audio) {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.play();
+    }
 
 
 
   }
 }
 </script>
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
+
+
 <style lang="css" scoped>
+img{
+  height: 500px;
+  width: 500px;
+}
 
 .container {
   height: 600px;
@@ -299,7 +308,6 @@ export default {
   position: relative;
   /* border: 3px solid green; */
 }
-
 .buttoncenter {
   position: absolute;
   top: 4%;
@@ -310,17 +318,11 @@ export default {
 .buttonpadding {
   margin-left: 20px;
   margin-right: 20px;
-
 }
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
-}
-
-img {
-  height: 500px;
-  width: 500px;
+  width: 100%;
 }
 </style>

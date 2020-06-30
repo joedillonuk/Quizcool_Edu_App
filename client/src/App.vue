@@ -1,6 +1,5 @@
 <template lang="html">
 <div class="bkg">
-
 <home-page v-if="!selectedUser"/>
 <div >
 <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
@@ -64,8 +63,8 @@ export default {
   mounted() {
     eventBus.$on('puzzle-result', (result)=>{
       this.puzzleScore = result
-      this.currentScore.push(result)
-    
+
+
     })
     eventBus.$on('user-selected', (user)=>{
       this.selectedUser = user
@@ -112,7 +111,7 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .main-font {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
