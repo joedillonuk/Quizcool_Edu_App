@@ -17,27 +17,27 @@
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item">
-          <img class="" v-if="this.selectedCategory !== 22" v-on:click.once="handleCategory(22)" src="../assets/icons/geography-bw.png" alt="geography">
+          <img class="" title="Geography"v-if="this.selectedCategory !== 22" v-on:click.once="handleCategory(22)" src="../assets/icons/geography-bw.png" alt="geography">
           <img class="" v-if="this.selectedCategory === 22" v-on:click.once="handleCategory(22)" src="../assets/icons/geography-color.png" alt="geography">
         </a>
 
         <a class="navbar-item">
-          <img class="" v-if="this.selectedCategory !== 21" v-on:click.once="handleCategory(21)" src="../assets/icons/sport-bw.png" alt="sport">
+          <img class="" title="Sport" v-if="this.selectedCategory !== 21" v-on:click.once="handleCategory(21)" src="../assets/icons/sport-bw.png" alt="sport">
           <img class="" v-if="this.selectedCategory === 21" v-on:click.once="handleCategory(21)" src="../assets/icons/sport-color.png" alt="sport">
         </a>
 
         <a class="navbar-item">
-          <img v-if="this.selectedCategory !== 23" v-on:click.once="handleCategory(23)" src="../assets/icons/history-bw.png" alt="history">
+          <img title="History" v-if="this.selectedCategory !== 23" v-on:click.once="handleCategory(23)" src="../assets/icons/history-bw.png" alt="history">
           <img v-if="this.selectedCategory === 23" v-on:click.once="handleCategory(23)" src="../assets/icons/history-color.png" alt="history">
         </a>
 
         <a class="navbar-item">
-          <img v-if="this.selectedCategory !== 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-bw.png" alt="science">
+          <img title="Science" v-if="this.selectedCategory !== 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-bw.png" alt="science">
           <img v-if="this.selectedCategory === 17" v-on:click.once="handleCategory(17)" src="../assets/icons/science-color.png" alt="science">
         </a>
 
         <a class="navbar-item">
-          <img v-if="this.selectedCategory !== 18" v-on:click.once="handleCategory(18)" src="../assets/icons/computing-bw.png" alt="computing">
+          <img title="Computing" v-if="this.selectedCategory !== 18" v-on:click.once="handleCategory(18)" src="../assets/icons/computing-bw.png" alt="computing">
           <img v-if="this.selectedCategory === 18" v-on:click.once="handleCategory(18)" src="../assets/icons/computing-color.png" alt="computing">
         </a>
 

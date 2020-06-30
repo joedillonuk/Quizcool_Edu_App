@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="columns">
     <div class= "column is-one-third"></div>
-    <div class= "card column is-one-third card-bkg">
-    <h2 class="main-font">You have answered {{currentScore.length}} questions.</h2>
-    <h2 class="main-font" v-if="currentScore.length">Your score is {{totalScore}}.</h2>
-    <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2>
+    <div class= "card column is-one-third card-bkg has-text-centered">
+    <h2 class="main-font">You have answered <strong>{{currentScore.length}}</strong> questions.</h2>
+    <h2 class="main-font" v-if="currentScore.length">Your score is <strong>{{totalScore}}</strong>.</h2>
+    <h2 class="main-font" v-if="percentage">You have answered <strong>{{percentage}}% </strong>of questions right.</h2>
     <button class="button" v-if="!displayLeaderboard" v-on:click="sortUsers">Display Leaderboard</button>
     <div v-if="displayLeaderboard">
       <table class="table is-striped" style="width:100%">
