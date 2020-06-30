@@ -109,5 +109,7 @@ export default {
 .bkg{
   background-size: cover;
   background-image: url('./assets/backgrounds/home.jpeg');
+  height: 900px;
 }
+
 </style>
