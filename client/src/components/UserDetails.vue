@@ -1,8 +1,14 @@
 <template lang="html">
 <div>
+  <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
+  <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
+  <!-- <label for="">Level:</label>
+  <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
+    <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
+  </select> -->
         <div class="navbar-item has-dropdown is-hoverable" v-if="selectedUser">
-          <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
-          <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
+
+          <!-- <p class="main-font navbar-item" >Level: {{selectedUser.level}}</p> -->
 
           <a class="navbar-link">
             {{selectedUser.name}}
@@ -13,18 +19,13 @@
               Log Out
             </a>
             <hr class="navbar-divider">
-            <a class="navbar-item" v-on:click="">
+            <a class="navbar-item" v-on:click="deleteUser">
               Delete Account
             </a>
           </div>
           <div class="">
-            <!-- <a class="main-font navbar-item" >Total Points: {{selectedUser.points}}.</a> -->
           </div>
-          <!-- <p class="main-font navbar-item" >Total Points: {{selectedUser.points}}.</p> -->
 
-    <!-- <h2 class="main-font">You have answered {{currentScore.length}} questions.</h2>
-    <h2 class="main-font" v-if="currentScore.length">Your score is {{totalScore}}.</h2>
-    <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2> -->
   </div>
 </div>
 
@@ -44,13 +45,14 @@ export default {
   props: ['selectedUser'],
   mounted(){
     eventBus.$on("send-score", score => {
-      this.currentScore.push(score);
+      this.currentScore.push(score)
+
       if(this.totalScore > this.selectedUser.highScore){
         this.selectedUser.highScore = this.totalScore
         this.postUserScore()
       }
       this.sendResult()
-
+      this.sendScore()
     });
 
 
@@ -77,10 +79,18 @@ export default {
     logOut(){
       location.reload();
     },
+    deleteUser(){
+      let id = this.selectedUser._id;
+      UserService.deleteUser(id)
+      location.reload()
+    },
     sendResult: function(){
       if(this.completedQuiz == true){
         eventBus.$emit('quiz-completed', this.completedQuiz)
       }
+    },
+    sendScore: function(){
+      eventBus.$emit('current-score', this.currentScore)
     },
     sleep: function(milliseconds) {
       const date = Date.now();

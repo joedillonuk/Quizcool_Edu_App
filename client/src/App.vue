@@ -3,21 +3,18 @@
 
 <home-page v-if="!selectedUser"/>
 <div >
-  <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
-  <!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
-</div>
+<navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
 
+</div>
+<welcome-page v-if="!selectedCategory && !selectedDifficulty"  :selectedUser="selectedUser"/>
 <div v-if="!completedQuiz">
-<!-- <user-details :selectedUser="selectedUser" v-if="selectedUser"/> -->
-<!-- <navigation-bar/> -->
-<select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
+<!-- <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
   <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
-</select>
-<question-grid :questions = "questions" v-if="selectedCategory"/>
+</select> -->
+<question-grid :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
 </div>
 <div v-if="completedQuiz">
-<!-- <user-details :selectedUser="selectedUser"/> -->
-<results :selectedUser="selectedUser"/>
+<results :currentScore="currentScore"/>
 </div>
 <div class="center" v-if="completedQuiz">
   <puzzle/>
@@ -34,6 +31,7 @@ import HomePage from './components/HomePage.vue'
 import UserDetails from './components/UserDetails.vue'
 import Results from './components/Results.vue'
 import Puzzle from './components/Puzzle.vue'
+import WelcomePage from './components/WelcomePage.vue'
 
 
 import { eventBus } from "./main.js";
@@ -46,7 +44,8 @@ export default {
       selectedCategory: null,
       selectedUser: null,
       completedQuiz: null,
-      selectedDifficulty: "easy"
+      selectedDifficulty: null,
+      currentScore: []
     };
   },
   components: {
@@ -56,11 +55,17 @@ export default {
     'user-details': UserDetails,
     'results': Results,
     'puzzle': Puzzle
+    'welcome-page': WelcomePage
   },
+
+
 
   mounted() {
     eventBus.$on('user-selected', (user)=>{
       this.selectedUser = user
+    })
+    eventBus.$on('selected-difficulty', (level) => {
+      this.selectedDifficulty = level
     })
     eventBus.$on("category-selected", category => {
       this.selectedCategory = category;
@@ -68,6 +73,10 @@ export default {
       eventBus.$on('quiz-completed', (quiz) => {
         // this.sleep(3000)
         this.completedQuiz = quiz
+      })
+
+      eventBus.$on('current-score', result => {
+        this.currentScore = result
       })
 
 
@@ -80,6 +89,7 @@ export default {
           this.questions = data.results;
         });
     })
+
   },
   methods: {
     sleep: function(milliseconds) {
@@ -88,13 +98,16 @@ export default {
       do {
         currentDate = Date.now();
       } while (currentDate - date < milliseconds);
-    }
+    },
+    onListUpdated(level){
+     this.selectedDifficulty = level
+  }
   }
 
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .main-font {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;

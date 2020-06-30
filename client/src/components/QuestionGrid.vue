@@ -22,13 +22,13 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .question-font{
   font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
 }
 .card{
-  margin-top: 150px;
+  margin-top: 80px;
   margin-bottom: 200px;
 
 }
