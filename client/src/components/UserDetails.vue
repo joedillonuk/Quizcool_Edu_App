@@ -1,5 +1,5 @@
 <template lang="html">
-<div>
+<div class="navbar-end">
   <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
   <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
   <!-- <label for="">Level:</label>
@@ -11,7 +11,7 @@
           <!-- <p class="main-font navbar-item" >Level: {{selectedUser.level}}</p> -->
 
           <a class="navbar-link">
-            {{selectedUser.name}}
+            <strong>{{selectedUser.name}}</strong>
           </a>
 
           <div class="navbar-dropdown">
@@ -135,4 +135,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 </style>

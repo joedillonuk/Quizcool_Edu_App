@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="container" v-if="!puzzleCompleted">
+  <div class="columns has-text-centered" v-if="!puzzleCompleted">
     <audio id="puzzledrop">
       <source src="../assets/sfx/puzzledrop.wav" type="audio/wav">
         </audio>
@@ -11,19 +11,29 @@
           <audio id="thwack">
             <source src="../assets/sfx/thwack.wav" type="audio/wav">
               </audio>
+              <div class="column is-one-quarter"></div>
+              <div class="column is-two-quarter ">
+                <h2><strong>PUZZLE !!!</strong></h2>
+              <h2>You can get few extra points by completing the puzzle below. <br>
+                For Easy level you get <strong>6 points</strong>, for medium <strong>8</strong> and <strong>10 points</strong> for hard level</h2>
 
-    <div class="buttoncenter">
-      <button class="buttonpadding" v-on:click="initEasy();" type="button" name="button" value="Get pic">Easy Puzzle</button>
-      <button class="buttonpadding" v-on:click="initMedium();" type="button" name="button" value="Get pic">Medium Puzzle</button>
-      <button class="buttonpadding" v-on:click="initHard();" type="button" name="button" value="Get pic">Hard Puzzle</button>
-    </div>
+
+      <button class="button" v-on:click="initEasy();" type="button" name="button" value="Get pic">Easy Puzzle</button>
+
+      <button class="button" v-on:click="initMedium();" type="button" name="button" value="Get pic">Medium Puzzle</button>
+
+      <button class="button" v-on:click="initHard();" type="button" name="button" value="Get pic">Hard Puzzle</button>
+
     <br><br>
     <div class="center">
       <img v-if="displayOriginal" id="testImg" src="../assets/puzzles/2.jpg" height="500" width="500" alt="Puzzle Time!">
-      <canvas id="canvas"></canvas>
+<canvas id="canvas"></canvas>
     </div>
-    <button class="buttonpadding" v-on:click="initAbsurd();" type="button" name="button" value="Get pic">Absurd! DO NOT CLICK!</button>
+    <h3>You can get extra 20 points by completing 100 pieces puzzle below</h3>
+    <button class="button" v-on:click="initAbsurd();" type="button" name="button" value="Get pic">Absurd! DO NOT CLICK!</button>
 
+</div>
+  <div class="column is-one-quarter"></div>
   </div>
 </template>
 
@@ -302,7 +312,8 @@ img{
   width: 500px;
 }
 
-.container {
+.columns {
+  margin-top: 60px;
   height: 600px;
   width: auto;
   position: relative;
@@ -315,7 +326,8 @@ img{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-.buttonpadding {
+.button {
+  margin-top: 50px;
   margin-left: 20px;
   margin-right: 20px;
 }
