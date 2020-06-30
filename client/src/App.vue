@@ -95,6 +95,6 @@ export default {
 }
 .bkg{
   background-size: cover;
-  background-image: url('./assets/backgrounds/home.jpeg');
+  background-image: url('./assets/backgrounds/home.jpg');
 }
 </style>

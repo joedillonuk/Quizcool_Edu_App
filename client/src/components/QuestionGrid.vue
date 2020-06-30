@@ -27,12 +27,12 @@ export default {
   font-weight: 500;
 }
 .card{
-  margin-top: 80px;
-  /* box-shadow: 5px 10px green; */
+  margin-top: 150px;
+  margin-bottom: 200px;
 
 }
 .card-bkg{
-  background-color: #e8e4e1;
-  /* opacity: 0.5; */
+  background-color: #41E0B5;
 }
+
 </style>

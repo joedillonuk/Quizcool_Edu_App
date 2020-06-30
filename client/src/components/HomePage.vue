@@ -4,7 +4,7 @@
       <div class="column is-one-third"></div>
       <div class="card column is-one-third">
         <header class="card-header">
-          <p class="card-header-title is-centered">Welcome</p>
+          <p class="card-header-title is-centered">Welcome!</p>
         </header>
         <div class="card-content">
           <div class="content is-centered">
@@ -12,9 +12,15 @@
               <option class="main-font" disabled value="" selected>Select a user...</option>
               <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
             </select>
-            <p>create new user</p>
+            <p class="user">create new user</p>
             <form v-on:submit="createUser">
-              <input placeholder="Enter Name" type="text" v-model="name">
+              <input placeholder="Enter Name" type="text" v-model="name" class="input">
+              <!-- <div class="field"> -->
+  <!-- <p class="control has-icons-left has-icons-right">
+    <input class="input" type="text" placeholder="enter name...">
+    <span class="icon is-small is-left">
+      <i class="fa fa-user-circle"></i>
+    </span></p></div> -->
               <input class="" type="submit" value="Add User">
             </form>
             </div>
@@ -75,10 +81,14 @@ export default {
 <style lang="css" scoped>
 .card{
   margin-top: 200px;
-  margin-bottom: 250px;
-  /* margin-right: 100px; */
+  margin-bottom: 230px;
   text-align: center;
-  background-color: #ffe680;
+  background-color: #41E0B5;
+}
+.user{
+  margin-top: 35px;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
 }
 /* .background{
   background-image: url('../assets/backgrounds/home.jpeg');
