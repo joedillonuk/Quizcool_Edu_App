@@ -8,20 +8,21 @@
         </header>
         <div class="card-content">
           <div class="content is-centered">
-            <select v-on:change="handleSelectUser" v-model="selectedUser">
+            <div>
+              <p class="main-font" for="">Please select User</p>
+            <select  class="select" v-on:change="handleSelectUser" v-model="selectedUser">
               <option class="main-font" disabled value="" selected>Select a user...</option>
               <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
             </select>
-            <p class="user">create new user</p>
+            </div>
+            </br>
+            <p class="main-font">Or Create New Account</p>
             <form v-on:submit="createUser">
-              <input placeholder="Enter Name" type="text" v-model="name" class="input">
-              <!-- <div class="field"> -->
-  <!-- <p class="control has-icons-left has-icons-right">
-    <input class="input" type="text" placeholder="enter name...">
-    <span class="icon is-small is-left">
-      <i class="fa fa-user-circle"></i>
-    </span></p></div> -->
-              <input class="" type="submit" value="Add User">
+              <input placeholder="Enter Name" type="text" v-model="name" class="input is-dark">
+              <p></p>
+              <p></p>
+              <span></span>
+              <input class="button" type="submit" value="Add User">
             </form>
             </div>
             <div class="column is-one-third"></div>
@@ -88,9 +89,18 @@ export default {
 .user{
   margin-top: 35px;
   font-family: 'Ubuntu', sans-serif;
-  font-weight: 500;
+  /* font-weight: 500; */
 }
-.background{
+/* .background{
   background-image: url('../assets/backgrounds/home.jpg');
+} */
+
+.button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.button{
+  background-color: white;
+  color: black;
+  border: 1px solid grey;
 }
 </style>
