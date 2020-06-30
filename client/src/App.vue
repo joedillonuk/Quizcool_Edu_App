@@ -54,7 +54,7 @@ export default {
     'home-page': HomePage,
     'user-details': UserDetails,
     'results': Results,
-    'puzzle': Puzzle
+    'puzzle': Puzzle,
     'welcome-page': WelcomePage
   },
 

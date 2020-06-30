@@ -129,7 +129,7 @@ img {
   width: 175px;
   margin: 10px;
   padding-bottom: 10px;
-  text-align:center; 
+  text-align: center;
 }
 
 input {
