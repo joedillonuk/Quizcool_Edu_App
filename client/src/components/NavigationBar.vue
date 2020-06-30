@@ -2,8 +2,8 @@
 
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://codeclan.com/glasgow/">
-        <img src="../assets/backgrounds/CODE.png" width="112" height="28">
+      <a class="navbar-item" v-on:click="logOut">
+        <img src="../assets/icons/question.png" width="112" height="28">
       </a>
 
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -68,6 +68,9 @@ export default {
     handleCategory(category){
       this.selectedCategory = category
       eventBus.$emit('category-selected', this.selectedCategory)
+    },
+    logOut(){
+      location.reload();
     }
 
   },
