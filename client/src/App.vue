@@ -6,13 +6,13 @@
   <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
 
 </div>
-
-<div v-if="!completedQuiz">
+<welcome-page v-if="!selectedCategory && !selectedDifficulty"  :selectedUser="selectedUser"/>
+<!-- <div v-if="!completedQuiz">
 <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
   <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
 </select>
 <question-grid :questions = "questions" v-if="selectedCategory"/>
-</div>
+</div> -->
 <div v-if="completedQuiz">
 <results :currentScore="currentScore"/>
 </div>
@@ -26,6 +26,7 @@ import QuestionItem from "./components/QuestionItem.vue";
 import HomePage from './components/HomePage.vue'
 import UserDetails from './components/UserDetails.vue'
 import Results from './components/Results.vue'
+import WelcomePage from './components/WelcomePage.vue'
 
 
 import { eventBus } from "./main.js";
@@ -38,7 +39,7 @@ export default {
       selectedCategory: null,
       selectedUser: null,
       completedQuiz: null,
-      selectedDifficulty: "easy",
+      selectedDifficulty: null,
       currentScore: []
     };
   },
@@ -47,7 +48,8 @@ export default {
     "question-grid": QuestionGrid,
     'home-page': HomePage,
     'user-details': UserDetails,
-    'results': Results
+    'results': Results,
+    'welcome-page': WelcomePage
   },
 
   mounted() {
@@ -62,9 +64,13 @@ export default {
         this.completedQuiz = quiz
       })
 
-      eventBus.$on('current-score', result =>
+      eventBus.$on('current-score', result => {
         this.currentScore = result
-      )
+      })
+
+      eventBus.$on('selected-difficulty', (level) => {
+        this.selectedDifficulty = level
+      })
 
       fetch(
         `https://opentdb.com/api.php?amount=3&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=boolean`
