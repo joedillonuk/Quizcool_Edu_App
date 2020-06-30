@@ -13,7 +13,7 @@
 </select> -->
 <question-grid :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
 </div>
-<div v-if="completedQuiz">
+<div v-if="puzzleScore">
 <results :currentScore="currentScore"/>
 </div>
 <div class="center" v-if="completedQuiz">
@@ -45,7 +45,8 @@ export default {
       selectedUser: null,
       completedQuiz: null,
       selectedDifficulty: null,
-      currentScore: []
+      currentScore: [],
+      puzzleScore: null
     };
   },
   components: {
@@ -54,13 +55,16 @@ export default {
     'home-page': HomePage,
     'user-details': UserDetails,
     'results': Results,
-    'puzzle': Puzzle
+    'puzzle': Puzzle,
     'welcome-page': WelcomePage
   },
 
 
 
   mounted() {
+    eventBus.$on('puzzle-result', (result)=>{
+      this.puzzleScore = result
+    })
     eventBus.$on('user-selected', (user)=>{
       this.selectedUser = user
     })
