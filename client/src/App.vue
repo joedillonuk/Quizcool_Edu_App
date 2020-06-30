@@ -1,6 +1,5 @@
 <template lang="html">
 <div class="bkg">
-
 <home-page v-if="!selectedUser"/>
 <div >
 <navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
@@ -54,7 +53,7 @@ export default {
     'home-page': HomePage,
     'user-details': UserDetails,
     'results': Results,
-    'puzzle': Puzzle
+    'puzzle': Puzzle,
     'welcome-page': WelcomePage
   },
 
@@ -107,7 +106,7 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .main-font {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
