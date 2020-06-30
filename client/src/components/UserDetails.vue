@@ -40,12 +40,14 @@ export default {
   data(){
     return {
       currentScore: [],
-      puzzleScore: null
+      puzzleScore: null,
+      originalHighScore: null,
 
     }
   },
   props: ['selectedUser'],
   mounted(){
+    this.originalHighScore = this.selectedUser.highScore
     // added 'puzzle-result' eventBus. This is being added in the totalScore below.
         eventBus.$on('puzzle-result', (result)=>{
           this.puzzleScore = result
@@ -118,8 +120,14 @@ export default {
     },
     updateIfHighScore: function(){
       if(this.totalScore > this.selectedUser.highScore){
+        // let originalHighScore = this.selectedUser.highScore
         this.selectedUser.highScore = this.totalScore
         this.postUserScore()
+        // let newHighScore = this.selectedUser.highScore
+        const highScoreString = `You got a new high score! You beat your previous best by ${this.selectedUser.highScore - this.originalHighScore} points!`
+        eventBus.$emit('high-score', highScoreString)
+        console.log(highScoreString);
+
       }
     }
   }

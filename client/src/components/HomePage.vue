@@ -67,9 +67,11 @@ export default {
       UserService.updateUser(payload)
       .then(user => {this.users.push(user)
         ,
-        this.selectedUser = user.name
+      this.selectedUser = this.users[(this.users.length) - 1]
+      eventBus.$emit('user-selected', this.selectedUser)
       })
       this.name = ''
+
     }
   },
   components:{

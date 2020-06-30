@@ -13,7 +13,7 @@
 <question-grid :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
 </div>
 <div v-if="puzzleScore">
-<results :currentScore="currentScore" :selectedUser="selectedUser"/>
+<results :currentScore="currentScore" :selectedUser="selectedUser" :highScoreString="highScoreString" :puzzleScore="puzzleScore"/>
 </div>
 <div class="center" v-if="completedQuiz">
   <puzzle/>
@@ -45,7 +45,8 @@ export default {
       completedQuiz: null,
       selectedDifficulty: null,
       currentScore: [],
-      puzzleScore: null
+      puzzleScore: null,
+      highScoreString: null
     };
   },
   components: {
@@ -64,6 +65,10 @@ export default {
     eventBus.$on('puzzle-result', (result)=>{
       this.puzzleScore = result
 
+      eventBus.$on('high-score', (string) => {
+        console.log('eventBus received:', string);
+        this.highScoreString = string
+      })
 
     })
     eventBus.$on('user-selected', (user)=>{
