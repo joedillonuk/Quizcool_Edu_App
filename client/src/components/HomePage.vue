@@ -1,5 +1,6 @@
 <template lang="html">
   <div>
+    <img class="center" src="../assets/icons/question.png" alt="logo">
     <div class="columns">
       <div class="column is-one-third"></div>
       <div class="card column is-one-third">
@@ -94,5 +95,15 @@ export default {
 }
 .background{
   background-image: url('../assets/backgrounds/home.jpg');
+}
+img.center {
+    display: block;
+    margin: 0 auto;
+    height: 150px;
+    width: 150px;
+    padding-top: 15px
+}
+.columns{
+  margin-top: -165px
 }
 </style>
