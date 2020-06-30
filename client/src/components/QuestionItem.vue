@@ -107,7 +107,6 @@ export default {
       this.answers.push(this.question.correct_answer);
       return this.answers
     },
-<<<<<<< HEAD
 
     shuffleAnswers(array){
       for (let i = array.length - 1; i > 0; i--) {
@@ -115,56 +114,6 @@ export default {
         let temp = array[i];
         array[i] = array[j];
         array[j] = temp;
-=======
-    methods: {
-      sendScore() {
-          if (this.answer === this.question.correct_answer){
-            this.userScore += 1
-          }
-
-        if (this.answer){
-          eventBus.$emit('send-score', this.userScore)
-        }
-        // this.sleep(3000)
-      },
-      // sleep: function(milliseconds) {
-      //   const date = Date.now();
-      //   let currentDate = null;
-      //   do {
-      //     currentDate = Date.now();
-      //   } while (currentDate - date < milliseconds);
-      // },
-
-      escapeHtml(question) {
-        return question
-        .replace(/&amp/g, " ")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">")
-        .replace(/&quot;/g, "")
-        .replace(/&#039;/g, "'")
-        .replace(/&deg;/g, "°")
-        .replace(/&Pi;/g, "π")
-        .replace(/&Sigma;/g, "Σ")
-        .replace(/&Omicron;/g, "Ο")
-        .replace(/&Nu;/g, "Ν");
-      },
-
-      getAnswers(){
-        this.question.incorrect_answers.map((incorrectAnswer) => {
-          this.answers.push(incorrectAnswer)
-        })
-        this.answers.push(this.question.correct_answer);
-        return this.answers
-      },
-
-      shuffleAnswers(array){
-        for (let i = array.length - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1));
-          let temp = array[i];
-          array[i] = array[j];
-          array[j] = temp;
-        }
->>>>>>> aae3b514306ad08fbc4a4add835b64a6b72cbc2f
       }
     },
     playAudio(audio) {
@@ -193,23 +142,12 @@ export default {
 
   <style lang="css" scoped>
 
-  {/* .correct {
-    color: green;
-  }
-
-  .incorrect {
-  color: red;
-} */}
 
 img {
   width: 175px;
   margin: 10px;
   padding-bottom: 10px;
-<<<<<<< HEAD
   text-align:center;
-=======
-  text-align: center;
->>>>>>> aae3b514306ad08fbc4a4add835b64a6b72cbc2f
 }
 
 input {
