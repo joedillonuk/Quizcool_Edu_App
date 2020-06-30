@@ -16,7 +16,7 @@
 </template>
 
 <script>
-
+import { eventBus } from '../main.js'
 
 export default {
   name: 'puzzle',
@@ -269,7 +269,9 @@ export default {
     },
     sendPuzzleResult(){
       eventBus.$emit('puzzle-result', this.puzzleScore)
-    }
+    },
+
+    
 
 
 
