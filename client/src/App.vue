@@ -73,7 +73,7 @@ export default {
 
 
       fetch(
-        `https://opentdb.com/api.php?amount=3&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=boolean`
+        `https://opentdb.com/api.php?amount=3&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=multiple`
       )
         .then(res => res.json())
         .then(data => {

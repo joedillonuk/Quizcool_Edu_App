@@ -4,8 +4,10 @@
     <p>{{escapeHtml(question.question)}}</p>
     <div class="main-font" v-if="!this.answer">
       <label for="answer">Answer:</label>
-      <input v-on:change="sendScore()" v-model="answer" type="radio" name="answer" value="True">True</input>
-      <input v-on:change="sendScore()" v-model="answer" type="radio" name="answer" value="False">False</input>
+      <div v-for="i in answers">
+        <input v-on:change="sendScore()" v-model="answer" type="radio" name="answer" :value="i"> {{ i }}</input>
+        <br>
+      </div>
     </div>
     <br>
 
@@ -21,7 +23,7 @@
 
     <div>
       <img class="correct" v-if="this.answer === question.correct_answer" src="../assets/feedback/correct.png">
-      <img class="incorrect" v-if="this.answer === question.incorrect_answers[0]" src="../assets/feedback/incorrect.png">
+      <img class="incorrect" v-if="this.answer !== question.correct_answer && this.answer" src="../assets/feedback/incorrect.png">
       <br>
     </div>
 
@@ -39,7 +41,8 @@
     data(){
       return {
         answer: null,
-        userScore: 0
+        userScore: 0,
+        answers: []
       }
     },
     computed: {
@@ -78,11 +81,31 @@
         .replace(/&quot;/g, "")
         .replace(/&#039;/g, "'")
         .replace(/&deg;/g, "°");
+      },
+
+      getAnswers(){
+        this.question.incorrect_answers.map((incorrectAnswer) => {
+          this.answers.push(incorrectAnswer)
+        })
+        this.answers.push(this.question.correct_answer);
+        return this.answers
+      },
+
+      shuffleAnswers(array){
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          let temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
       }
     },
     mounted() {
       eventBus.$on('category-selected', (category) => {
       this.answer = null})
+
+      this.getAnswers();
+      this.shuffleAnswers(this.answers);
     },
 
   }
@@ -92,7 +115,7 @@
 
 
 
-  <style lang="css" scoped>
+<style lang="css" scoped>
 
 {/* .correct {
   color: green;
@@ -104,7 +127,13 @@
 
 img {
   width: 175px;
-  margin: 0px;
+  margin: 10px;
+  padding-bottom: 10px;
+  text-align:center; 
+}
+
+input {
+  font-weight: 100
 }
 
   </style>

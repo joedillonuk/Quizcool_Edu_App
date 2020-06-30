@@ -5,6 +5,7 @@
 <ol v-for=" question in questions" >
   <question-item :question="question"/>
 </ol>
+<br>
 </div>
 <div class="column is-one-third"></div>
 </div>
