@@ -87,6 +87,10 @@ export default {
   margin-top: 100px;
   margin-bottom: 400px;
 }
+.button{
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
 .card-bkg{
   background-color: #ffe680;
 }

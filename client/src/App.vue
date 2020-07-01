@@ -10,7 +10,8 @@
 <!-- <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
   <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
 </select> -->
-<question-grid :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
+<question-grid :currentScore="currentScore" :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
+
 </div>
 
 <div v-if="puzzleScore">

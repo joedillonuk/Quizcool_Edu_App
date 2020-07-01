@@ -41,9 +41,10 @@
           <img v-if="this.selectedCategory === 18" v-on:click.once="handleCategory(18)" src="../assets/icons/computing-color.png" alt="computing">
         </a>
 
-        <div class="navbar-end">
-          <user-details :selectedUser="selectedUser" v-if="selectedUser" class="navbar-item"/>
-        </div>
+
+      </div>
+      <div class="navbar-end">
+        <user-details :selectedUser="selectedUser" v-if="selectedUser" class="navbar-item"/>
       </div>
     </div>
   </nav>
@@ -61,7 +62,7 @@ export default {
     return {
       categories: [],
       selectedCategory: null,
-      // selectedUser: null
+      
     }
   },
   methods:{

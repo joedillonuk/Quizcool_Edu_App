@@ -19,17 +19,6 @@
           </div>
         </div>
         <br>
-
-        <!-- <div v-if="!this.answer">
-        <button v-model="this.userScore" v-on:click="decideAnswer" type="button" name="button">Submit</button>
-      </div> -->
-
-      <!-- <div>
-      <p class="correct" v-if="this.answer === question.correct_answer">You answered {{this.answer}}. You are correct!</p>
-      <p class="incorrect" v-if="this.answer === question.incorrect_answers[0]">You answered {{this.answer}}. You are incorrect.</p>
-      <br>
-    </div> -->
-
     <div>
       <img class="correct" v-if="this.answer === question.correct_answer" src="../assets/feedback/correct.png">
       <img class="incorrect" v-if="this.answer !== question.correct_answer && this.answer" src="../assets/feedback/incorrect.png">
@@ -54,13 +43,7 @@ export default {
       answers: []    }
   },
   computed: {
-    // userScore: function(){
-    //   let score = 0;
-    //   if (this.answer === this.question.correct_answer){
-    //     score += 1
-    //   }
-    //   return score
-    // }
+    
   },
   methods: {
     sendScore() {
@@ -97,7 +80,8 @@ export default {
       .replace(/&gt;/g, ">")
       .replace(/&quot;/g, "")
       .replace(/&#039;/g, "'")
-      .replace(/&deg;/g, "°");
+      .replace(/&deg;/g, "°")
+      // .replace(/&#039;{str}&#039;/g,"{str}")
     },
 
     getAnswers(){

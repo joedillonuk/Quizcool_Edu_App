@@ -1,4 +1,5 @@
 <template lang="html">
+  <div>
 <div class="navbar-end">
   <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
   <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
@@ -29,6 +30,7 @@
   </div>
 </div>
 
+</div>
 </template>
 
 <script>
@@ -78,7 +80,7 @@ export default {
       return Math.round((100 / this.currentScore.length) * this.totalScore);
     },
     completedQuiz: function(){
-      if (this.currentScore.length == 5){
+      if (this.currentScore.length == 6){
         // this.sleep(3000)
         return true
       } else {

@@ -6,6 +6,9 @@
   <question-item :question="question"/>
 </ol>
 <br>
+<div class="next" v-if="this.currentScore.length % 5 == 0">
+  <h2><strong>Please select next category</strong></h2>
+</div>
 </div>
 <div class="column is-one-third"></div>
 </div>
@@ -15,7 +18,7 @@
 import QuestionItem from './QuestionItem.vue'
 export default {
   name: 'question-grid',
-  props: ['questions'],
+  props: ['questions', 'currentScore'],
   components:{
     'question-item': QuestionItem
   }
@@ -35,5 +38,7 @@ export default {
 .card-bkg{
   background-color: #41E0B5;
 }
-
+.next{
+  text-align: center;
+}
 </style>
