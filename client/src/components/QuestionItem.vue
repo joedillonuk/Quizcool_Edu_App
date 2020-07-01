@@ -43,7 +43,7 @@ export default {
       answers: []    }
   },
   computed: {
-    
+
   },
   methods: {
     sendScore() {

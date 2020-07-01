@@ -63,6 +63,8 @@ export default {
             this.postUserScore();
             let message = `You have unlocked hard difficulty!`
             eventBus.$emit('level-message', message)
+          } else {
+            return null
           }
           this.updateIfHighScore();
         })
@@ -91,7 +93,7 @@ export default {
       return Math.round((100 / this.currentScore.length) * this.totalScore);
     },
     completedQuiz: function(){
-      if (this.currentScore.length == 6){
+      if (this.currentScore.length == 5){
         // this.sleep(3000)
         return true
       } else {
