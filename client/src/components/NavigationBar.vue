@@ -42,7 +42,7 @@
         </a>
 
         <div class="navbar-end">
-          <user-details :selectedUser="selectedUser" v-if="selectedUser" class="navbar-item"/>
+          <user-details :selectedUser="selectedUser" :selectedDifficulty="selectedDifficulty" v-if="selectedUser" class="navbar-item"/>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@ import UserDetails from './UserDetails.vue'
 
 export default {
   name: 'navigation-bar',
-  props: ['users', 'selectedUser'],
+  props: ['users', 'selectedUser', 'selectedDifficulty'],
   data(){
     return {
       categories: [],

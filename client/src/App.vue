@@ -2,7 +2,7 @@
 <div class="bkg">
 <home-page v-if="!selectedUser"/>
 <div >
-<navigation-bar v-if="selectedUser" :selectedUser="selectedUser"/>
+<navigation-bar v-if="selectedUser" :selectedUser="selectedUser" :selectedDifficulty="selectedDifficulty"/>
 
 </div>
 <welcome-page v-if="!selectedCategory && !selectedDifficulty"  :selectedUser="selectedUser"/>
@@ -13,7 +13,7 @@
 <question-grid :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
 </div>
 <div v-if="puzzleScore">
-<results :currentScore="currentScore" :selectedUser="selectedUser" :highScoreString="highScoreString" :puzzleScore="puzzleScore"/>
+<results :currentScore="currentScore" :selectedUser="selectedUser" :highScoreString="highScoreString" :puzzleScore="puzzleScore" :levelMessage="levelMessage" :users="users"/>
 </div>
 <div class="center" v-if="completedQuiz">
   <puzzle/>
@@ -31,6 +31,7 @@ import UserDetails from './components/UserDetails.vue'
 import Results from './components/Results.vue'
 import Puzzle from './components/Puzzle.vue'
 import WelcomePage from './components/WelcomePage.vue'
+import UserService from './services/UserService.js'
 
 
 import { eventBus } from "./main.js";
@@ -46,7 +47,9 @@ export default {
       selectedDifficulty: null,
       currentScore: [],
       puzzleScore: null,
-      highScoreString: null
+      highScoreString: null,
+      levelMessage: null,
+      users: []
     };
   },
   components: {
@@ -63,12 +66,19 @@ export default {
 
   mounted() {
     eventBus.$on('puzzle-result', (result)=>{
-      this.puzzleScore = result
+      this.puzzleScore = result;
 
-      eventBus.$on('high-score', (string) => {
-        console.log('eventBus received:', string);
-        this.highScoreString = string
-      })
+    eventBus.$on('level-message', (message) => {
+      this.levelMessage = message
+    })
+
+    eventBus.$on('high-score', (string) => {
+      console.log('eventBus received:', string);
+      this.highScoreString = string
+    })
+
+    UserService.getUsers()
+    .then(users => (this.users = users));
 
     })
     eventBus.$on('user-selected', (user)=>{

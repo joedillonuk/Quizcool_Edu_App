@@ -45,13 +45,24 @@ export default {
 
     }
   },
-  props: ['selectedUser'],
+  props: ['selectedUser', 'selectedDifficulty'],
   mounted(){
     this.originalHighScore = this.selectedUser.highScore
     // added 'puzzle-result' eventBus. This is being added in the totalScore below.
         eventBus.$on('puzzle-result', (result)=>{
-          this.puzzleScore = result
-          this.updateIfHighScore()
+          this.puzzleScore = result;
+          if (this.percentage >= 70 && this.selectedDifficulty === 'easy' && this.selectedUser.level.length === 1){
+            this.selectedUser.level.push('medium');
+            this.postUserScore();
+            let message = `You have unlocked medium difficulty!`
+            eventBus.$emit('level-message', message)
+          } else if (this.percentage >= 70 && this.selectedDifficulty === 'medium' && this.selectedUser.level.length === 2){
+            this.selectedUser.level.push('hard');
+            this.postUserScore();
+            let message = `You have unlocked hard difficulty!`
+            eventBus.$emit('level-message', message)
+          }
+          this.updateIfHighScore();
         })
 
     eventBus.$on("send-score", score => {
@@ -114,6 +125,7 @@ export default {
     postUserScore: function(){
       let id = this.selectedUser._id;
       const user = {
+        level: this.selectedUser.level,
         highScore: this.selectedUser.highScore
       }
       UserService.updateExistingUser(id, user)

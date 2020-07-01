@@ -19,7 +19,7 @@ db.users.insertMany([
   },
   {
     name: "David Eastcroft",
-    level: ["easy", "medium", "hard"],
+    level: ["easy"],
     highScore: 0
   }
 

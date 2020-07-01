@@ -9,6 +9,8 @@
     <!-- <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2> -->
 <br>
     <h2 class="main-font" v-if="highScoreString">{{highScoreString}}</h2>
+    <br>
+    <h2 v-if="levelMessage">{{levelMessage}}</h2>
 <br>
     <button class="button" v-if="!displayLeaderboard" v-on:click="sortUsers">Display Leaderboard</button>
     <div v-if="displayLeaderboard">
@@ -39,17 +41,11 @@ export default {
   name: 'results',
   data(){
     return {
-      users: [],
       displayLeaderboard: null
     }
   },
-  props: ['currentScore', 'highScoreString', 'selectedUser', 'puzzleScore'],
+  props: ['currentScore', 'highScoreString', 'selectedUser', 'puzzleScore', 'levelMessage', 'users'],
   mounted(){
-
-
-
-    UserService.getUsers()
-    .then(users => (this.users = users))
 
 
 
@@ -71,7 +67,8 @@ export default {
           return b.highScore - a.highScore
         });
       }
-      this.displayLeaderboard = true
+      this.displayLeaderboard = true;
+      return this.users;
     }
   }
 }
