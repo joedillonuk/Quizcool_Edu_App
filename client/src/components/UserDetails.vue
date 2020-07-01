@@ -1,34 +1,34 @@
 <template lang="html">
   <div>
-<div class="navbar-end">
-  <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
-  <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
-  <!-- <label for="">Level:</label>
-  <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
-    <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
-  </select> -->
-        <div class="navbar-item has-dropdown is-hoverable" v-if="selectedUser">
+    <div class="navbar-end">
+      <p class="main-font navbar-item" >Total Points: {{this.totalScore}}</p>
+      <p class="main-font navbar-item" >High Score: {{selectedUser.highScore}}</p>
+      <!-- <label for="">Level:</label>
+      <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
+      <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
+    </select> -->
+    <div class="navbar-item has-dropdown is-hoverable" v-if="selectedUser">
 
-          <!-- <p class="main-font navbar-item" >Level: {{selectedUser.level}}</p> -->
+      <!-- <p class="main-font navbar-item" >Level: {{selectedUser.level}}</p> -->
 
-          <a class="navbar-link">
-            <strong>{{selectedUser.name}}</strong>
-          </a>
+      <a class="navbar-link">
+        <strong>{{selectedUser.name}}</strong>
+      </a>
 
-          <div class="navbar-dropdown">
-            <a class="navbar-item" v-on:click="logOut">
-              Log Out
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item" v-on:click="deleteUser">
-              Delete Account
-            </a>
-          </div>
-          <div class="">
-          </div>
+      <div class="navbar-dropdown">
+        <a class="navbar-item" v-on:click="logOut">
+          Log Out
+        </a>
+        <hr class="navbar-divider">
+        <a class="navbar-item" v-on:click="deleteUser">
+          Delete Account
+        </a>
+      </div>
+      <div class="">
+      </div>
 
+    </div>
   </div>
-</div>
 
 </div>
 </template>
@@ -51,23 +51,12 @@ export default {
   mounted(){
     this.originalHighScore = this.selectedUser.highScore
     // added 'puzzle-result' eventBus. This is being added in the totalScore below.
-        eventBus.$on('puzzle-result', (result)=>{
-          this.puzzleScore = result;
-          if (this.percentage >= 70 && this.selectedDifficulty === 'easy' && this.selectedUser.level.length === 1){
-            this.selectedUser.level.push('medium');
-            this.postUserScore();
-            let message = `You have unlocked medium difficulty!`
-            eventBus.$emit('level-message', message)
-          } else if (this.percentage >= 70 && this.selectedDifficulty === 'medium' && this.selectedUser.level.length === 2){
-            this.selectedUser.level.push('hard');
-            this.postUserScore();
-            let message = `You have unlocked hard difficulty!`
-            eventBus.$emit('level-message', message)
-          } else {
-            return null
-          }
-          this.updateIfHighScore();
-        })
+    eventBus.$on('puzzle-result', (result)=>{
+      this.puzzleScore = result;
+      this.updateIfHighScore();
+      this.checkDifficultyUnlock();
+
+    })
 
     eventBus.$on("send-score", score => {
       this.currentScore.push(score)
@@ -90,7 +79,7 @@ export default {
       return (this.currentScore.reduce((sum, current) => sum + current, 0)) + this.puzzleScore;
     },
     percentage: function() {
-      return Math.round((100 / this.currentScore.length) * this.totalScore);
+      return Math.round((100 / this.currentScore.length) * (this.totalScore- this.puzzleScore));
     },
     completedQuiz: function(){
       if (this.currentScore.length == 5){
@@ -134,19 +123,56 @@ export default {
       }
       UserService.updateExistingUser(id, user)
     },
+    postUserLevel: function(){
+      let id = this.selectedUser._id;
+      const user = {
+        level: this.selectedUser.level,
+      }
+      UserService.updateExistingUser(id, user)
+    },
     updateIfHighScore: function(){
       if(this.totalScore > this.selectedUser.highScore){
         // let originalHighScore = this.selectedUser.highScore
         this.selectedUser.highScore = this.totalScore
         this.postUserScore()
         // let newHighScore = this.selectedUser.highScore
-        const highScoreString = `You got a new high score! You beat your previous best by ${this.selectedUser.highScore - this.originalHighScore} points!`
+        const highScoreString = [`You got a new high score! You beat your previous best by ${this.selectedUser.highScore - this.originalHighScore} points!`, this.selectedUser.highScore]
         eventBus.$emit('high-score', highScoreString)
         console.log(highScoreString);
 
       }
-    }
+    },
+    checkDifficultyUnlock: function(){
+      if(this.selectedUser.level.length != 3){
+        if(this.percentage >= 70){
+          console.log(this.percentage);
+          if(this.selectedUser.level.length === 1){
+            this.selectedUser.level.push('medium');
+            let message = `You have unlocked medium difficulty!`
+            eventBus.$emit('level-message', message)
+          }
+
+          if(this.selectedUser.level.length === 2 && this.selectedDifficulty === 'medium'){
+            this.selectedUser.level.push('hard');
+            let message = `You have unlocked hard difficulty!`
+            eventBus.$emit('level-message', message)
+          }
+
+
+        } else {
+          let message = `Answer 70% or more correctly to unlock a new difficulty!`
+          eventBus.$emit('level-message', message)
+        }
+      } else {
+        return null;
+      }
+      this.postUserLevel();
+    },
+
+
+
   }
+
 }
 </script>
 

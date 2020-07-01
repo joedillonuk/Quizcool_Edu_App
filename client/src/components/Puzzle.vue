@@ -17,20 +17,20 @@
               <h2>You can get few extra points by completing the puzzle below. <br>
                 For Easy level you get <strong>6 points</strong>, for medium <strong>8</strong> and <strong>10 points</strong> for hard level</h2>
 
-
+<div v-if="buttonDisplay == true">
       <button class="button" v-on:click="initEasy();" type="button" name="button" value="Get pic">Easy Puzzle</button>
 
       <button class="button" v-on:click="initMedium();" type="button" name="button" value="Get pic">Medium Puzzle</button>
 
       <button class="button" v-on:click="initHard();" type="button" name="button" value="Get pic">Hard Puzzle</button>
-
+</div>
     <br><br>
     <div class="center">
       <img v-if="displayOriginal" id="testImg" src="../assets/puzzles/2.jpg" height="500" width="500" alt="Puzzle Time!">
 <canvas id="canvas"></canvas>
     </div>
     <h3>You can get extra 20 points by completing 100 pieces puzzle below</h3>
-    <button class="button" v-on:click="initAbsurd();" type="button" name="button" value="Get pic">Absurd! DO NOT CLICK!</button>
+    <button v-if="buttonDisplay == true" class="button" v-on:click="initAbsurd();" type="button" name="button" value="Get pic">Absurd! DO NOT CLICK!</button>
 
 </div>
   <div class="column is-one-quarter"></div>
@@ -46,6 +46,8 @@ export default {
       puzzleScore: 0,
       puzzleCompleted: false,
       difficulty: 3,
+buttonDisplay: true,
+
       puzzleHover: '#009900',
       canvas: null,
       stage: null,
@@ -65,23 +67,27 @@ export default {
   },
   methods: {
     initEasy(){
+      this.buttonDisplay = false,
       this.img = document.getElementById("testImg")
       console.log(this.img);
       this.onImage();
       this.displayOriginal = false;
     },
     initMedium(){
+      this.buttonDisplay = false,
       this.difficulty = 4;
       this.img = document.getElementById("testImg")
       this.onImage();
       this.displayOriginal = false;
     },
     initHard(){
+      this.buttonDisplay = false,
       this.difficulty = 5;
       this.img = document.getElementById("testImg")
       this.onImage();
       this.displayOriginal = false;
     },initAbsurd(){
+      this.buttonDisplay = false,
       this.difficulty = 10;
       this.img = document.getElementById("testImg")
       this.onImage();
