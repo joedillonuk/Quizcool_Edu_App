@@ -12,7 +12,9 @@
 </select> -->
 <question-grid :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
 </div>
+
 <div v-if="puzzleScore">
+
 <results :currentScore="currentScore" :selectedUser="selectedUser" :highScoreString="highScoreString" :puzzleScore="puzzleScore"/>
 </div>
 <div class="center" v-if="completedQuiz">

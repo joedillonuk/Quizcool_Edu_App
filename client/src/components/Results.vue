@@ -1,16 +1,17 @@
 <template lang="html">
   <div class="columns">
     <div class= "column is-one-third"></div>
-    <div class= "card column is-one-third card-bkg">
+    <div class= "card column is-one-third card-bkg has-text-centered">
       <h1 class="main-font"><b>Hey {{selectedUser.name}}, you scored {{totalScore + puzzleScore}} points!.</b></h1>
 <br>
-    <h2 class="main-font">You answered {{currentScore.length}} questions.</h2>
-    <h2 class="main-font" v-if="currentScore.length">You got {{totalScore}} correct, (that's {{percentage}}%) and got {{puzzleScore}} points for the puzzle!</h2>
-    <!-- <h2 class="main-font" v-if="percentage">You have answered {{percentage}}% of questions right.</h2> -->
+    <h2 class="main-font">You answered <strong>{{currentScore.length}}</strong> questions.</h2>
+    <h2 class="main-font" v-if="currentScore.length">You got <strong>{{totalScore}}</strong> correct, (that's {{percentage}}%) and got <strong>{{puzzleScore}}</strong> points for the puzzle!</h2>
+
 <br>
     <h2 class="main-font" v-if="highScoreString">{{highScoreString}}</h2>
 <br>
     <button class="button" v-if="!displayLeaderboard" v-on:click="sortUsers">Display Leaderboard</button>
+    <button class="button" v-on:click="playAgain">Play Again</button>
     <div v-if="displayLeaderboard">
       <table class="table is-striped" style="width:100%">
         <tr class="">
@@ -63,6 +64,7 @@ export default {
     percentage: function() {
       return Math.round((100 / this.currentScore.length) * this.totalScore);
     }
+
   },
   methods: {
     sortUsers: function(){
@@ -72,6 +74,9 @@ export default {
         });
       }
       this.displayLeaderboard = true
+    },
+    playAgain(){
+      location.reload();
     }
   }
 }
