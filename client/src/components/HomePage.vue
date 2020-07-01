@@ -9,20 +9,21 @@
         </header>
         <div class="card-content">
           <div class="content is-centered">
-            <select v-on:change="handleSelectUser" v-model="selectedUser">
+            <label for="">Please select user</label>
+            <p></p>
+            <select v-on:change="handleSelectUser" v-model="selectedUser" class="select is-small">
+
               <option class="main-font" disabled value="" selected>Select a user...</option>
               <option class="main-font" v-for="(user, index) in users"  :value="user" :key="index">{{user.name}}</option>
             </select>
-            <p class="user">create new user</p>
+            <p></p>
+            <p></p>
+            <p class="main-font">Or <strong>create new user</strong> to play!</p>
             <form v-on:submit="createUser">
-              <input placeholder="Enter Name" type="text" v-model="name" class="input">
-              <!-- <div class="field"> -->
-  <!-- <p class="control has-icons-left has-icons-right">
-    <input class="input" type="text" placeholder="enter name...">
-    <span class="icon is-small is-left">
-      <i class="fa fa-user-circle"></i>
-    </span></p></div> -->
-              <input class="" type="submit" value="Add User">
+              <input placeholder="Enter Name" type="text" v-model="name" class="input is-dark">
+              <p></p>
+              <p></p>
+              <input class="button" type="submit" value="Add User">
             </form>
             </div>
             <div class="column is-one-third"></div>
@@ -91,7 +92,7 @@ export default {
 .user{
   margin-top: 35px;
   font-family: 'Ubuntu', sans-serif;
-  font-weight: 500;
+  /* font-weight: 500; */
 }
 .background{
   background-image: url('../assets/backgrounds/home.jpg');
@@ -106,4 +107,16 @@ img.center {
 .columns{
   margin-top: -165px
 }
+
+.button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button{
+  background-color: white;
+  color: black;
+  border: 1px solid grey;
+}
+
+
 </style>
