@@ -1,7 +1,7 @@
 <template lang="html">
 <div class="bkg">
 <home-page v-if="!selectedUser"/>
-<div >
+<div>
 <navigation-bar v-if="selectedUser" :selectedUser="selectedUser" :selectedDifficulty="selectedDifficulty"/>
 
 </div>
@@ -76,7 +76,8 @@ export default {
 
     eventBus.$on('high-score', (string) => {
       console.log('eventBus received:', string);
-      this.highScoreString = string
+      this.highScoreString = string[0]
+      this.selectedUser.highScore = string[1]
     })
 
     UserService.getUsers()
