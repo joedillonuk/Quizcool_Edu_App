@@ -1,25 +1,35 @@
 <template lang="html">
-<div class="bkg">
-<home-page v-if="!selectedUser"/>
-<div>
-<navigation-bar v-if="selectedUser" :selectedUser="selectedUser" :selectedDifficulty="selectedDifficulty"/>
+  <div class="bkg"
+  :class="{
+    'main-background':!selectedCategory,
+    'geography': selectedCategory === 22,
+    'sport': selectedCategory === 21,
+    'history': selectedCategory === 23,
+    'science': selectedCategory === 17,
+    'computing': selectedCategory === 18
+    }"
+    >
+    <home-page v-if="!selectedUser"/>
+    <div>
+      <navigation-bar v-if="selectedUser" :selectedUser="selectedUser" :selectedDifficulty="selectedDifficulty"/>
 
-</div>
-<welcome-page v-if="!selectedCategory && !selectedDifficulty"  :selectedUser="selectedUser"/>
-<div v-if="!completedQuiz">
-<!-- <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
-  <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
-</select> -->
-<question-grid :currentScore="currentScore" :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
+    </div>
+    <welcome-page v-if="!selectedCategory && !selectedDifficulty"  :selectedUser="selectedUser"/>
+    <div v-if="!completedQuiz">
+      <!-- <select v-model="selectedDifficulty" v-if="selectedUser && selectedUser.level.length > 1">
+      <option v-for="difficulty in selectedUser.level" :value="difficulty">{{difficulty}}</option>
+    </select> -->
 
-</div>
+    <question-grid :loading="loading" :currentScore="currentScore" :questions = "questions" v-if="selectedCategory && selectedDifficulty"/>
 
-<div v-if="puzzleScore">
-<results :currentScore="currentScore" :selectedUser="selectedUser" :highScoreString="highScoreString" :puzzleScore="puzzleScore" :levelMessage="levelMessage" :users="users"/>
-</div>
-<div class="center" v-if="completedQuiz">
-  <puzzle/>
-</div>
+  </div>
+
+  <div v-if="puzzleScore">
+    <results :currentScore="currentScore" :selectedUser="selectedUser" :highScoreString="highScoreString" :puzzleScore="puzzleScore" :levelMessage="levelMessage" :users="users"/>
+  </div>
+  <div class="center" v-if="completedQuiz">
+    <puzzle/>
+  </div>
 
 </div>
 </template>
@@ -51,7 +61,8 @@ export default {
       puzzleScore: null,
       highScoreString: null,
       levelMessage: null,
-      users: []
+      users: [],
+      loading: false
     };
   },
   components: {
@@ -70,18 +81,18 @@ export default {
     eventBus.$on('puzzle-result', (result)=>{
       this.puzzleScore = result;
 
-    eventBus.$on('level-message', (message) => {
-      this.levelMessage = message
-    })
+      eventBus.$on('level-message', (message) => {
+        this.levelMessage = message
+      })
 
-    eventBus.$on('high-score', (string) => {
-      console.log('eventBus received:', string);
-      this.highScoreString = string[0]
-      this.selectedUser.highScore = string[1]
-    })
+      eventBus.$on('high-score', (string) => {
+        console.log('eventBus received:', string);
+        this.highScoreString = string[0]
+        this.selectedUser.highScore = string[1]
+      })
 
-    UserService.getUsers()
-    .then(users => (this.users = users));
+      UserService.getUsers()
+      .then(users => (this.users = users));
 
     })
     eventBus.$on('user-selected', (user)=>{
@@ -103,14 +114,7 @@ export default {
       })
 
 
-
-      fetch(
-        `https://opentdb.com/api.php?amount=5&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=multiple`
-      )
-        .then(res => res.json())
-        .then(data => {
-          this.questions = data.results;
-        });
+      this.loadData()
     })
 
   },
@@ -122,6 +126,17 @@ export default {
         currentDate = Date.now();
       } while (currentDate - date < milliseconds);
     },
+    loadData: function(){
+      this.loading = true
+      fetch(
+        `https://opentdb.com/api.php?amount=5&category=${this.selectedCategory}&difficulty=${this.selectedDifficulty}&type=multiple`
+      )
+      .then(res => res.json())
+      .then(data => {
+        this.questions = data.results;
+        this.loading = false
+      });
+    }
 
 
   }
@@ -134,7 +149,16 @@ export default {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
 }
-.bkg {
+/* .bkg {
+background: url('./assets/backgrounds/home.jpg') no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+height: 1500px;
+} */
+
+.main-background{
   background: url('./assets/backgrounds/home.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -142,10 +166,50 @@ export default {
   background-size: cover;
   height: 1500px;
 }
-/* .bkg{
+.geography{
+  background: url('./assets/backgrounds/Geography.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  background-image: url('./assets/backgrounds/home.jpg');
-  height: 900px;
+  height: 1500px;
+}
+.sport{
+  background: url('./assets/backgrounds/Sport.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 1500px;
+}
+.history{
+  background: url('./assets/backgrounds/History.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 1500px;
+}
+.science{
+  background: url('./assets/backgrounds/Science.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 1500px;
+}
+.computing{
+  background: url('./assets/backgrounds/Computing.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 1500px;
+}
+/* .bkg{
+background-size: cover;
+background-image: url('./assets/backgrounds/home.jpg');
+height: 900px;
 } */
 
 </style>
