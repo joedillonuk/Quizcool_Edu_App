@@ -1,4 +1,4 @@
-# Welcome in Quizcool
+# Welcome to Quizcool
 The app created for secondary school students to test their knowledge in school subjects.
 Collect points, compete against your friends, collect bonuses
 
